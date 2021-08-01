@@ -5,8 +5,7 @@
 [- 项目简介](#项目简介)  
 [- 项目组成](#项目组成)  
 [- 使用演示](#使用演示)  
-[- 实现代码](#实现代码)  
-[- 优化展望](#优化展望)  
+[- 实现代码](#实现代码)
 [- 推荐文献](#推荐文献)  
 [- Timeline](#Timeline)
 
@@ -40,14 +39,14 @@
   - 连接 MySql 数据库编程
 
 - **3.通信协议：**
-  由于这是一个非周知服务，没有对应端口，RFC上没有对应的应用层协议，不过显然这个app也用不到什么多复杂的协议，简单几个指令传过去就好了。。
+  由于这是一个非周知服务，没有对应端口，RFC 上没有对应的应用层协议，不过显然这个 app 也用不到什么多复杂的协议，简单几个指令传过去就好了。。
 
 ---
 
 ### 使用演示
 
 - 服务端运行
-  1. [安装.NET](https://docs.microsoft.com/zh-cn/dotnet/core/install/),注意 .NET 在 2014 后开始跨平台移植了支持 linux，所以不用再需要 Mono 这个第三方提供环境了（当然.NET 并没有那么强大，比如 Unity 不接受.NET5 因为里面有 bug 和没有实现的东西，用的就是 Mono）。
+  1. [安装.NET](https://docs.microsoft.com/zh-cn/dotnet/core/install/),注意 .NET 在 2014 后开始跨平台移植了支持 linux，所以不用再需要 Mono 这个第三方提供环境了（当然 .NET 并没有那么强大，比如 Unity 不接受.NET5 因为里面有 bug 和没有实现的东西，用的就是 Mono）。
 
 ---
 
@@ -56,7 +55,7 @@
 1. 首先第一步肯定是建一个 repo，写一些计划文档之类的东西，自然用的是 github + git，文档使用的是 markdown 格式，另外特别 vscode 的所见即所得和 markdown 纠错插件舒服了。
    ![IMG]()
 
-2. 因为这个课设并不需要多大的并行服务量，所以我并没有实现线程池，也懒得用 c#的并行库的线程池。遇到的第一个难题是怎么确定线程的数量，如果是**CPU 密集型那么自然套 CPU 核心数 + 1**即可，**I/O 密集的程序，CPU 核心数 \* [1 + (IO/CPU)]**，但这个服务是一个交互式程序，阻塞占比估计9成以上，既不是一个CPU密集型也不是一个IO密集型，所以可以用这个**线程数 = Ncpu /（1 - 阻塞系数）**，ECS是2CPU4的，阻塞系数算0.9么估算是40，这里我用的是 Semaphore 控制线程资源。
+2. 因为这个课设并不需要多大的并行服务量，所以我并没有实现线程池，也懒得用 c#的并行库的线程池。遇到的第一个难题是怎么确定线程的数量，如果是**CPU 密集型那么自然套 CPU 核心数 + 1**即可，**I/O 密集的程序，CPU 核心数 \* [1 + (IO/CPU)]**，但这个服务是一个交互式程序，阻塞占比估计 9 成以上，既不是一个 CPU 密集型也不是一个 IO 密集型，所以可以用这个**线程数 = Ncpu /（1 - 阻塞系数）**，租的阿里云 ECS 是 2CPU 4 核心的，阻塞系数算 0.9 么估算是 40，这里我用的是 Semaphore 控制线程资源。
 3. 然后实现了一种非常简单的多线程 server demo，完成这部分功能，以后进行代码填空就行。
 
    - 给 ECS 开个测试安全组
@@ -73,19 +72,10 @@
 
 ---
 
-### 优化展望
-
----
-
 ### 推荐文献
 
 [1] _.NET Docs_ <https://docs.microsoft.com/zh-cn/dotnet/>  
-[2] _TCP/IP Illustrated, Volume 1 The Protocols_  
-[3] _Unix Network Programming, Volume 1: The Sockets Networking API_  
-[4] _Computer Networking A Top-Down Approach_  
-[5] _The Linux Programming Interface_  
-[6] _Computer Systems: A Programmer's Perspective_  
-[7] _Operating System Concepts_
+[2] _Unix Network Programming, Volume 1: The Sockets Networking API_
 
 ---
 
@@ -96,15 +86,14 @@
 - [x] 安装.net,linux 上 vscode 建立控制台项目
 - [x] 熟悉 c# socket 库
 - [x] 通信 demo
-- [x] 了解 c# 多线程库
-- [x] 了解 c# 同步 IPC
+- [x] 了解 c# 多线程库和同步 IPC
 - [x] 服务器多线程 demo
 - [x] 使用 ECS 而非 WSL 测试
 - [x] 讨论组内分工
 - [ ] 登录功能实现
-- [ ] 参照 FTP 协议
+- [ ] 实现应用层协议
 - [ ] 主要功能实现
-- [ ] ftp app demo 完成
+- [ ] car rental app demo 完成
 - [ ] 测试
 - [ ] 发布
 - [ ] 文档编写
