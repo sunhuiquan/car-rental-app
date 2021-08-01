@@ -61,12 +61,14 @@
    - 给 ECS 开个测试安全组
      ![IMG](./image/1.png)
    - 这是 server 的 demo 截图
-     ![IMG](./image/.png)
-     ![IMG](./image/.png)
+     ![IMG](./image/4.png)
+     ![IMG](./image/5.png)
    - 这是 client 的 demo 截图
-     ![IMG](./image/.png)
+     ![IMG](./image/6.png)
    - demo 测试截图
-     ![IMG](./image/.png)
+     ![IMG](./image/3.png)
+
+4. 忘记写.gitignore 了，而且别忘了改.gitignore 要先清一下 git 的缓存，不然仍然会 track.
 
 4 遇到了一个小问题就是一直跟我讲 Address already used 错误，我一开始以为是 TIME_WAIT 的地址重用问题，等待就好，然后发现不是(原理上也不是。。)，用 netstat 看了看进程发现上次运行的服务就没关。。
 

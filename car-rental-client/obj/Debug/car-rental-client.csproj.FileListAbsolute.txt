@@ -1,9 +1,0 @@
-C:\Users\water\Desktop\car-rental-app\car-rental-client\obj\Debug\car_rental_client.Form1.resources
-C:\Users\water\Desktop\car-rental-app\car-rental-client\obj\Debug\car_rental_client.Properties.Resources.resources
-C:\Users\water\Desktop\car-rental-app\car-rental-client\obj\Debug\car-rental-client.csproj.GenerateResource.cache
-C:\Users\water\Desktop\car-rental-app\car-rental-client\obj\Debug\car-rental-client.csproj.CoreCompileInputs.cache
-C:\Users\water\Desktop\car-rental-app\car-rental-client\bin\Debug\car-rental-client.exe.config
-C:\Users\water\Desktop\car-rental-app\car-rental-client\bin\Debug\car-rental-client.exe
-C:\Users\water\Desktop\car-rental-app\car-rental-client\bin\Debug\car-rental-client.pdb
-C:\Users\water\Desktop\car-rental-app\car-rental-client\obj\Debug\car-rental-client.exe
-C:\Users\water\Desktop\car-rental-app\car-rental-client\obj\Debug\car-rental-client.pdb
