@@ -10,7 +10,7 @@ namespace car_rental_client
         {
             try
             {
-                IPAddress ipAddress = IPAddress.Parse("8.136.218.156");
+                IPAddress ipAddress = IPAddress.Parse("127.0.0.1");
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 50000);
 
                 Socket sender = new Socket(ipAddress.AddressFamily,
