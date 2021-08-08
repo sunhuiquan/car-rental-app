@@ -40,13 +40,14 @@ namespace car_rental_server
 
 		private static void thread_handler(Object obj)
 		{
+			int is_closed = 0;
 			Socket handler = (Socket)obj;
 			string[] request_array = null;
-			string request = receive_request(handler);
+			string request = receive_request(handler, ref is_closed);
 			int num = request_parse(request, request_array);
 
 			// 登录功能（此功能必须第一个执行一次，其他功能顺序任意）
-			if ((num < 1) || (request_array[0].Equals("ACCOUNT") == false) ||
+			if ((is_closed == 1) || (num < 1) || (request_array[0].Equals("ACCOUNT") == false) ||
 			(CarRentalLogin.login(num, request_array, handler)) != 0)
 			{
 				end_server(handler);
@@ -56,14 +57,17 @@ namespace car_rental_server
 			// 循环执行其他请求功能
 			while (true)
 			{
-				request = receive_request(handler);
+				request = receive_request(handler, ref is_closed);
+				if (is_closed == 1)
+					break;
 				num = request_parse(request, request_array);
-			}
 
+				// to do
+			}
 			end_server(handler);
 		}
 
-		private static string receive_request(Socket handler)
+		private static string receive_request(Socket handler, ref int is_closed)
 		{
 			byte[] bytes = new Byte[1024];
 			string request = null;
@@ -71,6 +75,11 @@ namespace car_rental_server
 			while (true)
 			{
 				int bytesRec = handler.Receive(bytes);
+				if (bytesRec == 0)
+				{
+					is_closed = 1;
+					break;
+				}
 				request += Encoding.ASCII.GetString(bytes, 0, bytesRec);
 				if (request.IndexOf("\r\n") > -1)
 					break;

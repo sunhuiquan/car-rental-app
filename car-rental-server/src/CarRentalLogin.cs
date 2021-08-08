@@ -17,23 +17,28 @@ namespace car_rental_server
 				if (request_array[1].Equals("VISITOR"))
 				{
 					handler.Send(Encoding.ASCII.GetBytes("LOGIN_SUCCESS \r\n"));
+					return 0;
 				}
 				else if (request_array[1].Equals("USER"))
 				{
+					return -1;
 					// to do
 				}
 				else if (request_array[1].Equals("ADMINISTRATOR"))
 				{
+					return -1;
 					// to do
 				}
 				else
 				{
 					handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+					return -1;
 				}
 			}
 			else
 			{
 				handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+				return -1;
 			}
 		}
 	}
