@@ -8,6 +8,8 @@ namespace car_rental_server
 {
 	public class CarRentalServer
 	{
+		static Semaphore sem = new Semaphore(40,40);
+
 		static void thread_handler(Object obj)
 		{
 			Socket handler = (Socket)obj;
@@ -29,6 +31,8 @@ namespace car_rental_server
 
 			handler.Shutdown(SocketShutdown.Both);
 			handler.Close();
+
+			sem.Release();
 		}
 
 		public static void StartListening()
@@ -49,6 +53,7 @@ namespace car_rental_server
 					Socket handler = listener.Accept();
 					Console.WriteLine("Connect from " + ((IPEndPoint)handler.RemoteEndPoint).Address.ToString());
 
+					sem.WaitOne();
 					Thread thr = new Thread(new ParameterizedThreadStart(thread_handler));
 					thr.Start(handler);
 				}
