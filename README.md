@@ -41,10 +41,15 @@
 **3. 通信协议：**  
 由于这是一个非周知服务，没有对应端口，RFC 上没有对应的应用层协议，不过显然这个 app 也用不到什么多复杂的协议，简单几个指令传过去就好了。。
 
-  1. **[ ]** 代表可选参数，**\r\n** 作为分隔字节流的边界
-  1. 登录：**ACCOUNT TYPE \[account\] \[password\] \r\n**
+  1. **[ ]** 代表可选参数，不同字段以空格分隔，**\r\n** 作为分隔字节流的边界
+  1. 登录请求：**ACCOUNT TYPE \[account\] \[password\] \r\n**
       - TYPE是登录类型，指游客(VISITOR)、用户(USER)、管理员(ADMINISTRATOR)
 	  - account和password是具体账号密码，可选项(非游客才需要)
+  1. 登录响应：**RESPONSE \r\n**
+      - LOGIN_SUCCESS(登录成功)
+	  - ACCOUNT_NOT_FOUND(无该账号)
+	  - PASSWORD_WRONG(密码错误)
+	  - OTHER_WRONG(其他错误如网络或服务器的错误)
 
   **to do**
 

@@ -53,7 +53,6 @@ namespace car_rental_client
             this.passwork_text.Size = new System.Drawing.Size(203, 21);
             this.passwork_text.TabIndex = 1;
             this.passwork_text.UseSystemPasswordChar = true;
-            this.passwork_text.TextChanged += new System.EventHandler(this.user_login_button_Click);
             // 
             // label1
             // 
