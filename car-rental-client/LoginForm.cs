@@ -12,6 +12,16 @@ namespace car_rental_client
             InitializeComponent();
         }
 
+        // 加载窗口开始TCP连接
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+            if (CarRentalClient.connect() == -1)
+            {
+                MessageBox.Show("网络连接失败");
+                Application.Exit();
+            }
+        }
+
         // 游客登录
         private void visitor_login_button_Click(object sender, EventArgs e)
         {
@@ -58,6 +68,7 @@ namespace car_rental_client
         // 退出
         private void quit_button_Click(object sender, EventArgs e)
         {
+            CarRentalClient.close();
             Application.Exit();
         }
     }
