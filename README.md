@@ -26,39 +26,39 @@
 **1. 客户端：**  
 使用 c#和 WinForm 实现 windows 平台下的客户端，不考虑客户端跨平台,使用 VS。
 
-  - windows 下的 WinForm 实现客户端编程
-  - 流式 socket 编程与服务器通信
-  - OOP 编程技术
+- windows 下的 WinForm 实现客户端编程
+- 流式 socket 编程与服务器通信
+- OOP 编程技术
 
 **2. 服务端：**  
 使用 c#和 MySql，运行在 linux(Ubuntu 20.04)平台，拥有公网 IP 可在公网使用，使用 VScode.
 
-  - 多线程实现服务端的并发服务，由于个人并不熟悉 c#，所以服务器实现的非常简单，如果要更一步提升可以使用线程池、IO 多路复用等技术。
-  - 使用同步 IPC 来保证正确性，使用了信号量和互斥锁。
-  - 使用流式 socket 进行简单的网络编程，因为不熟悉 c#所以没有直接使用网络库，更推荐使用现有网络库。
-  - 连接 MySql 数据库编程
+- 多线程实现服务端的并发服务，由于个人并不熟悉 c#，所以服务器实现的非常简单，如果要更一步提升可以使用线程池、IO 多路复用等技术。
+- 使用同步 IPC 来保证正确性，使用了信号量和互斥锁。
+- 使用流式 socket 进行简单的网络编程，因为不熟悉 c#所以没有直接使用网络库，更推荐使用现有网络库。
+- 连接 MySql 数据库编程
 
 **3. 通信协议：**  
 由于这是一个非周知服务，没有对应端口，RFC 上没有对应的应用层协议，不过显然这个 app 也用不到什么多复杂的协议，简单几个指令传过去就好了。。
 
-  1. **[ ]** 代表可选参数，不同字段以空格分隔，**\r\n** 作为分隔字节流的边界
-  1. 登录请求：**ACCOUNT TYPE \[account\] \[password\] \r\n**
-      - TYPE是登录类型，指游客(VISITOR)、用户(USER)、管理员(ADMINISTRATOR)
-	  - account和password是具体账号密码，可选项(非游客才需要)
-  1. 登录响应：**RESPONSE \r\n**
-      - LOGIN_SUCCESS(登录成功)
-	  - ACCOUNT_NOT_FOUND(无该账号)
-	  - PASSWORD_WRONG(密码错误)
-	  - OTHER_WRONG(其他错误如网络或服务器的错误)
-
-  **to do**
+1. **[ ]** 代表可选参数，不同字段以空格分隔，**\r\n** 作为分隔字节流的边界
+1. 登录请求：**ACCOUNT TYPE \[account\] \[password\] \r\n**
+   - TYPE 是登录类型，指游客(VISITOR)、用户(USER)、管理员(ADMINISTRATOR)
+   - account 和 password 是具体账号密码，可选项(非游客才需要)
+1. 登录响应：**RESPONSE \r\n**
+   - LOGIN_SUCCESS(登录成功)
+   - ACCOUNT_NOT_FOUND(无该账号)
+   - PASSWORD_WRONG(密码错误)
+   - OTHER_WRONG(其他错误如网络或服务器的错误)
+   <!-- to do to do to do to do to do to do -->
 
 ---
 
 ### 使用演示
 
 **服务端运行:**
-  1. [安装.NET](https://docs.microsoft.com/zh-cn/dotnet/core/install/),注意 .NET 在 2014 后开始跨平台移植了支持 linux，所以不用再需要 Mono 这个第三方提供环境了（当然 .NET 并没有那么强大，比如 Unity 不接受.NET5 因为里面有 bug 和没有实现的东西，用的就是 Mono）。
+
+1. [安装.NET](https://docs.microsoft.com/zh-cn/dotnet/core/install/),注意 .NET 在 2014 后开始跨平台移植了支持 linux，所以不用再需要 Mono 这个第三方提供环境了（当然 .NET 并没有那么强大，比如 Unity 不接受.NET5 因为里面有 bug 和没有实现的东西，用的就是 Mono）。
 
 ---
 
