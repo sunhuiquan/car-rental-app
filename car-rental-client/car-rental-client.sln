@@ -5,6 +5,11 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "car-rental-client", "car-rental-client.csproj", "{7E05803C-7B4B-4A21-B63A-7077AE94F11F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D216868F-EA65-4C02-BD5F-1C0C3C16AE57}"
+	ProjectSection(SolutionItems) = preProject
+		src\CarRentalLogin.cs = src\CarRentalLogin.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
