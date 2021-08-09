@@ -50,7 +50,7 @@ namespace car_rental_server
 			Socket handler = (Socket)obj;
 			string[] request_array = null;
 			string request = receive_request(handler, ref is_closed);
-			int num = request_parse(request, request_array);
+			int num = request_parse(request, ref request_array);
 
 			// 登录功能（此功能必须第一个执行一次，其他功能顺序任意）
 			if ((is_closed == 1) || (num < 1) || (request_array[0].Equals("ACCOUNT") == false) ||
@@ -97,7 +97,7 @@ namespace car_rental_server
 		}
 
 		// 返回的是数组的Length
-		private static int request_parse(string request, string[] request_array)
+		private static int request_parse(string request, ref string[] request_array)
 		{
 			if (request != null)
 				request_array = request.Split(" "); // 注意分割符默认不只有空格
