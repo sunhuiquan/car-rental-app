@@ -38,6 +38,12 @@ namespace car_rental_server
 			}
 		}
 
+		/* 注意数组类型和自定义类型都是引用类型，作为参数传递本质和c/c++的指针一样，
+		 * 而不是和c++的引用一样。
+		 * 本质来说还是值传递，实参是形参的副本，和指针一样(指针本身是副本)，而引用
+		 * 只是一个别名，是同一个本体，没有副本，所以说c#/java的引用和指针本质才一样。
+		 * 参数是一个副本变量，值是拷贝进来的值，而c#引用类型的值就是c指针的值(地址)
+		 */
 		private static void thread_handler(Object obj)
 		{
 			int is_closed = 0;
@@ -94,7 +100,7 @@ namespace car_rental_server
 		private static int request_parse(string request, string[] request_array)
 		{
 			if (request != null)
-				request_array = request.Split();
+				request_array = request.Split(" "); // 注意分割符默认不只有空格
 			if (request_array != null) // null一解引用Length就会异常
 				return request_array.Length;
 			else
