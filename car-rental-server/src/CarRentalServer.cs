@@ -67,7 +67,7 @@ namespace car_rental_server
 				request = receive_request(handler, ref is_closed);
 				if (is_closed == 1)
 					break;
-				num = request_parse(request, request_array);
+				num = request_parse(request, ref request_array);
 
 				// to do
 			}
