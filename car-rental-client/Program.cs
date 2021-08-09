@@ -16,7 +16,7 @@ namespace car_rental_client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
+          Application.Run(new LoginForm());
         }
     }
 }

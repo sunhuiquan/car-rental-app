@@ -37,19 +37,26 @@ namespace car_rental_client
             return client_socket.Send(Encoding.ASCII.GetBytes(msg));
         }
 
-        public static string receive()
+        public static string receive(ref int is_closed)
         {
-            string msg = "";
-            int read_num;
-            byte[] bytes = new byte[1024];
+            byte[] bytes = new Byte[1024];
+            string request = null;
+
             while (true)
             {
-                read_num = client_socket.Receive(bytes);
-                msg += Encoding.ASCII.GetString(bytes);
-                if (read_num == 0)
+                int bytesRec = client_socket.Receive(bytes);
+                // 正常这样没有数据可读会阻塞，0说明对端套接字已经关闭，
+                // 最重要的是关闭在 \r\n 之前说明这个指令不全，需要舍弃
+                if (bytesRec == 0)
+                {
+                    is_closed = 1;
+                    break;
+                }
+                request += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                if (request.IndexOf("\r\n") > -1)
                     break;
             }
-            return msg;
+            return request;
         }
 
         public static void close()

@@ -21,18 +21,15 @@ namespace car_rental_client
             }
             else if (type == LOGIN_TYPE.ADMINISTRATOR)
             {
-                CarRentalClient.send(msg + "USER " + account + " " + password + " \r\n");
-            }
-            else
-            {
                 CarRentalClient.send(msg + "ADMINISTRATOR " + account + " " + password + " \r\n");
             }
 
-            string result = CarRentalClient.receive();
-            if (result == null)
+            int is_closed = 0;
+            string result = CarRentalClient.receive(ref is_closed);
+            if (result == null || is_closed == 1)
                 return LOGIN_RESULT.OTHER_WRONG;
 
-            string[] result_arrays = result.Split();
+            string[] result_arrays = result.Split(' ');
             if (result_arrays[0].Equals("LOGIN_SUCCESS"))
                 return LOGIN_RESULT.LOGIN_SUCCESS;
             else if (result_arrays[0].Equals("ACCOUNT_NOT_FOUND"))
