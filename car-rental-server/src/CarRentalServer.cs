@@ -100,7 +100,7 @@ namespace car_rental_server
 		private static int request_parse(string request, ref string[] request_array)
 		{
 			if (request != null)
-				request_array = request.Split(" "); // 注意分割符默认不只有空格
+				request_array = request.Split(' '); // 注意分割符默认不只有空格
 			if (request_array != null) // null一解引用Length就会异常
 				return request_array.Length;
 			else
