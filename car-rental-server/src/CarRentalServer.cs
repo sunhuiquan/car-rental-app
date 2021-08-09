@@ -50,6 +50,7 @@ namespace car_rental_server
 			if ((is_closed == 1) || (num < 1) || (request_array[0].Equals("ACCOUNT") == false) ||
 			(CarRentalLogin.login(num, request_array, handler)) != 0)
 			{
+				// 登陆失败
 				end_server(handler);
 				return;
 			}
@@ -75,6 +76,8 @@ namespace car_rental_server
 			while (true)
 			{
 				int bytesRec = handler.Receive(bytes);
+				// 正常这样没有数据可读会阻塞，0说明对端套接字已经关闭，
+				// 最重要的是关闭在 \r\n 之前说明这个指令不全，需要舍弃
 				if (bytesRec == 0)
 				{
 					is_closed = 1;
