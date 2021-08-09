@@ -83,6 +83,13 @@
 
 4. 遇到了一个小问题就是一直跟我讲 Address already used 错误，我一开始以为是 TIME_WAIT 的地址重用问题，等待就好，然后发现不是(原理上也不是。。)，用 netstat 看了看进程发现上次运行的服务就没关。。
 
+5. 使用NuGet给linux下引用了System.Data.SqlClient
+
+```c#
+// 可见sln里面显示了这个引用
+<PackageReference Include="System.Data.SqlClient" Version="4.8.2"/>
+```
+
 ---
 
 ### 推荐文献
@@ -103,7 +110,10 @@
 - [x] 服务器多线程 demo
 - [x] 使用 ECS 而非 WSL 测试
 - [x] 讨论组内分工
+- [ ] 数据库熟悉使用
 - [ ] 登录功能实现
+- [ ] 数据库设计
+- [ ] 数据库实现
 - [ ] 实现应用层协议
 - [ ] 主要功能实现
 - [ ] car rental app demo 完成
