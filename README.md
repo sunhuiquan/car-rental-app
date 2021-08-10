@@ -98,7 +98,8 @@
 ### 推荐文献
 
 [1] _.NET Docs_ <https://docs.microsoft.com/zh-cn/dotnet/>  
-[2] _Unix Network Programming, Volume 1: The Sockets Networking API_
+[2] _MySql .NET develop docs_ <https://dev.mysql.com/doc/connector-net/en/>
+[3] _Unix Network Programming, Volume 1: The Sockets Networking API_
 
 ---
 
