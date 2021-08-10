@@ -69,15 +69,15 @@
 
 1. 然后实现了一种非常简单的多线程 server demo，完成这部分功能，以后进行代码填空就行。
 
-   - 给 ECS 开个测试安全组
-     ![IMG](./image/1.png)
-   - 这是 server 的 demo 截图
-     ![IMG](./image/4.png)
-     ![IMG](./image/5.png)
-   - 这是 client 的 demo 截图
-     ![IMG](./image/6.png)
-   - demo 测试截图
-     ![IMG](./image/3.png)
+   - 给 ECS 开个测试安全组  
+     ![IMG](./image/1.png)  
+   - 这是 server 的 demo 截图  
+     ![IMG](./image/4.png)  
+     ![IMG](./image/5.png)  
+   - 这是 client 的 demo 截图  
+     ![IMG](./image/6.png)  
+   - demo 测试截图  
+     ![IMG](./image/3.png)  
 
 1. 因为这个课设并不需要多大的并行服务量，所以我并没有实现线程池，也懒得用 c#的并行库的线程池。遇到的第一个难题是怎么确定线程的数量，如果是**CPU 密集型那么自然套 CPU 核心数 + 1**即可，**I/O 密集的程序，CPU 核心数 \* [1 + (IO/CPU)]**，但这个服务是一个交互式程序，阻塞占比估计 9 成以上，既不是一个 CPU 密集型也不是一个 IO 密集型，所以可以用这个**线程数 = Ncpu /（1 - 阻塞系数）**，租的阿里云 ECS 是 2CPU 4 核心的，阻塞系数算 0.9 么估算是 40，这里我用的是 Semaphore 控制线程资源。
 
