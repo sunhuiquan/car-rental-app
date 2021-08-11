@@ -45,7 +45,7 @@
 1. 登录请求：**ACCOUNT TYPE \[account\] \[password\] \r\n**
    - TYPE 是登录类型，指游客(VISITOR)、用户(USER)、管理员(ADMINISTRATOR)
    - account 和 password 是具体账号密码，可选项(非游客才需要)
-<!-- 1. REGISTER to do -->
+   <!-- 1. REGISTER to do -->
 1. 各种各样的响应：**RESPONSE \r\n**
    - 登录响应:
      - LOGIN_SUCCESS(登录成功)
@@ -53,19 +53,19 @@
      - PASSWORD_WRONG(登录失败密码错误)
    - 通用响应:
      - OTHER_WRONG(其他错误如网络或服务器的错误)
-   <!-- to do to do to do to do to do to do -->
+     <!-- to do to do to do to do to do to do -->
 
 ---
 
 ### 使用演示
 
-1. 服务器上[安装.NET环境](https://docs.microsoft.com/zh-cn/dotnet/core/install/),注意 .NET 在 2014 后开始跨平台移植了支持 linux，所以不用再需要 Mono 这个第三方提供环境了（当然 .NET 并没有那么强大，比如 Unity 不接受.NET5 因为里面有 bug 和没有实现的东西，用的就是 Mono）。
-1. 服务器上安装MySQL并运行MySQL服务。  
-    ![IMG](./image/10.png)
+1. 服务器上[安装.NET 环境](https://docs.microsoft.com/zh-cn/dotnet/core/install/),注意 .NET 在 2014 后开始跨平台移植了支持 linux，所以不用再需要 Mono 这个第三方提供环境了（当然 .NET 并没有那么强大，比如 Unity 不接受.NET5 因为里面有 bug 和没有实现的东西，用的就是 Mono）。
+1. 服务器上安装 MySQL 并运行 MySQL 服务。  
+   ![IMG](./image/10.png)
 1. 服务器后台运行服务端程序(推荐成为一个守护进程，不过这里我至少单纯后台运行)。  
-    ![IMG](./image/x.png)
-1. 客户可以在windows环境下运行客户端程序(这里客户端没有跨平台，现在只支持windows)，然后通过程序窗体进行操作。  
-    ![IMG](./image/x.png)
+   ![IMG](./image/x.png)
+1. 客户可以在 windows 环境下运行客户端程序(这里客户端没有跨平台，现在只支持 windows)，然后通过程序窗体进行操作。  
+   ![IMG](./image/x.png)
 
 ---
 
@@ -77,28 +77,45 @@
 1. 然后实现了一种非常简单的多线程 server demo，完成这部分功能，以后进行代码填空就行。
 
    - 给 ECS 开个测试安全组  
-     ![IMG](./image/1.png)  
+     ![IMG](./image/1.png)
    - 这是 server 的 demo 截图  
      ![IMG](./image/4.png)  
-     ![IMG](./image/5.png)  
+     ![IMG](./image/5.png)
    - 这是 client 的 demo 截图  
-     ![IMG](./image/6.png)  
+     ![IMG](./image/6.png)
    - demo 测试截图  
-     ![IMG](./image/3.png)  
+     ![IMG](./image/3.png)
 
 1. 因为这个课设并不需要多大的并行服务量，所以我并没有实现线程池，也懒得用 c#的并行库的线程池。遇到的第一个难题是怎么确定线程的数量，如果是**CPU 密集型那么自然套 CPU 核心数 + 1**即可，**I/O 密集的程序，CPU 核心数 \* [1 + (IO/CPU)]**，但这个服务是一个交互式程序，阻塞占比估计 9 成以上，既不是一个 CPU 密集型也不是一个 IO 密集型，所以可以用这个**线程数 = Ncpu /（1 - 阻塞系数）**，租的阿里云 ECS 是 2CPU 4 核心的，阻塞系数算 0.9 么估算是 40，这里我用的是 Semaphore 控制线程资源。
 
 1. 遇到了一个小问题就是一直跟我讲 Address already used 错误，我一开始以为是 TIME_WAIT 的地址重用问题，等待就好，然后发现不是(原理上也不是。。)，用 netstat 看了看进程发现上次运行的服务就没关。。
 
-1. 使用NuGet给linux下引入MySql.Data包，才可以using MySql.Data.MySqlClient。
+1. 使用 NuGet 给 linux 下引入 MySql.Data 包，才可以 using MySql.Data.MySqlClient。
 
-    ```c#
-    // 可见sln里面显示了这个引用
-    <PackageReference Include="MySql.Data" Version="8.0.26"/>
-    ```
+   ```c#
+   // 可见sln里面显示了这个引用
+   <PackageReference Include="MySql.Data" Version="8.0.26"/>
+   ```
 
-1. 新建一个mysql用户发现看不到数据库，这是因为忘了授权了。  
-![IMG](./image/7.png)
+1. 新建一个 mysql 用户发现看不到数据库，这是因为忘了授权了。  
+   ![IMG](./image/7.png)
+
+1. 配置数据库:  
+   ![IMG](./image/8.png)  
+   ![IMG](./image/9.png)  
+   ![IMG](./image/11.png)  
+   ![IMG](./image/12.png)
+
+1. 测试远程使用数据库(数据库已放到 ECS 上了)  
+   ![IMG](./image/16.png)
+
+1. 实现登录功能，用户从客户端窗体点击,然后内部代码实现发送登录报文到服务器，服务器解析请求，发现是登录请求然后查询数据库，对比数据库数据看是否有此用户，服务器返回客户端登录结果，客户端解析登陆结果，然后客户端窗体显示结果。  
+   ![IMG](./image/13.png)  
+   ![IMG](./image/14.png)  
+   **注意这里是测试，所以用的是回环地址 127.0.0.1，后面实际项目是用公网 IP 的(这里是因为 wsl 比 ssh 舒适，等着项目完成后再放到 ECS 上)**  
+   ![IMG](./image/15.png)
+
+1. 实现注册功能
 
 ---
 
@@ -122,10 +139,9 @@
 - [x] 使用 ECS 而非 WSL 测试
 - [x] 讨论组内分工
 - [x] 数据库熟悉使用
-- [ ] 服务器配置mysql
-- [ ] 登录功能实现
-- [ ] 数据库设计
-- [ ] 数据库实现
+- [x] 服务器配置 mysql
+- [x] 登录功能实现
+- [x] 数据库设计
 - [ ] 实现应用层协议
 - [ ] 主要功能实现
 - [ ] car rental app demo 完成

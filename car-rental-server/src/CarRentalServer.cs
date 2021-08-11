@@ -91,11 +91,7 @@ namespace car_rental_server
 					}
 					else if (is_login && request_array[0].Equals(""))
 					{
-						/* 这里是其他功能，你们仿照我的登录功能写即可，
-						 * 大部分情况你们只需要额外写几个函数，然后在这里调用就可以完成任务
-						 * 数据库使用
-						 * string sql = "SELECT account, password FROM user";
-
+						/* 
 						eg 1:
 						string sql = "SELECT 查询语句";
 						MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
