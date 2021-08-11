@@ -48,13 +48,22 @@ namespace car_rental_server
 		{
 			MySqlCommand cmd = new MySqlCommand(sql_str, CarRentalServer.conn_db);
 			MySqlDataReader rdr = cmd.ExecuteReader();
-
-			// while (rdr.Read())
-			// {
-			// 	Console.WriteLine(rdr[0] + " -- " + rdr[1]);
-			// }
-			// rdr.Close();
-			return "";
+			while (rdr.Read())
+			{
+				if (account.Equals(rdr[0]))
+				{
+					if (password.Equals(rdr[1]))
+					{
+						return "LOGIN_SUCCESS \r\n";
+					}
+					else
+					{
+						return "PASSWORD_WRONG \r\n";
+					}
+				}
+			}
+			rdr.Close();
+			return "ACCOUNT_NOT_FOUND \r\n";
 		}
 	}
 }
