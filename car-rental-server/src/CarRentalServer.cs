@@ -59,22 +59,38 @@ namespace car_rental_server
 			string request = receive_request(handler, ref is_closed);
 			int num = request_parse(request, ref request_array);
 
-			// 登录功能（此功能必须第一个执行一次，其他功能顺序任意）
-			if ((is_closed == 1) || (num < 1) || (request_array[0].Equals("ACCOUNT") == false) ||
-			(CarRentalLogin.login(num, request_array, handler)) != 0)
-			{
-				// 登陆失败
-				end_server(handler);
-				return;
-			}
-
-			// 循环执行其他请求功能
+			bool is_login = false; // 一些功能必须先登录才可以进行
 			while (true)
 			{
 				request = receive_request(handler, ref is_closed);
-				if (is_closed == 1)
+				if (is_closed == 1) // 因为对端关闭所以服务结束
 					break;
 				num = request_parse(request, ref request_array);
+
+				// 解析指令 /r/n必有，一个功能说明必有，至少是2
+				if (num < 2)
+				{
+					handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+				}
+				else
+				{
+					if (request_array[0].Equals("ACCOUNT"))
+					{
+
+					}
+					else if (request_array[0].Equals("REGISTER"))
+					{
+
+					}
+					else if (request_array[0].Equals(""))
+					{
+
+					}
+					else
+					{
+						handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+					}
+				}
 
 				// to do
 			}
