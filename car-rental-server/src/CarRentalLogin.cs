@@ -54,10 +54,12 @@ namespace car_rental_server
 				{
 					if (password.Equals(rdr[1]))
 					{
+						rdr.Close();
 						return "LOGIN_SUCCESS \r\n";
 					}
 					else
 					{
+						rdr.Close();
 						return "PASSWORD_WRONG \r\n";
 					}
 				}

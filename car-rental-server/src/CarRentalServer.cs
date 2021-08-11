@@ -56,16 +56,14 @@ namespace car_rental_server
 			int is_closed = 0;
 			Socket handler = (Socket)obj;
 			string[] request_array = null;
-			string request = receive_request(handler, ref is_closed);
-			int num = request_parse(request, ref request_array);
 
 			bool is_login = false; // 一些功能必须先登录才可以进行
 			while (true)
 			{
-				request = receive_request(handler, ref is_closed);
+				string request = receive_request(handler, ref is_closed);
 				if (is_closed == 1) // 因为对端关闭所以服务结束
 					break;
-				num = request_parse(request, ref request_array);
+				int num = request_parse(request, ref request_array);
 
 				// 解析指令 /r/n必有，一个功能说明必有，至少是2
 				if (num < 2)
