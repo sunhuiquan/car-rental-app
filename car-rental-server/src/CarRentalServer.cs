@@ -74,27 +74,48 @@ namespace car_rental_server
 				}
 				else
 				{
+					// 功能解析
 					if (request_array[0].Equals("ACCOUNT"))
 					{
-
+						if (check_login_num(num, request_array) == 0)
+						{
+							if (CarRentalLogin.login(request_array, handler) == 0)
+								is_login = true; // 登陆成功
+						}
+						else
+						{
+							handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+						}
 					}
 					else if (request_array[0].Equals("REGISTER"))
 					{
 
 					}
-					else if (request_array[0].Equals(""))
+					else if (is_login && request_array[0].Equals(""))
 					{
-
+						/*
+						*/
 					}
 					else
 					{
 						handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
 					}
 				}
-
-				// to do
 			}
 			end_server(handler);
+		}
+
+		private static int check_login_num(int num, string[] request_array)
+		{
+			if (request_array[1].Equals("VISITOR") && num < 3)
+			{
+				return -1;
+			}
+			else if ((request_array[1].Equals("USER") || request_array[1].Equals("ADMINISTER")) && num < 5)
+			{
+				return -1;
+			}
+			return 0;
 		}
 
 		private static string receive_request(Socket handler, ref int is_closed)
