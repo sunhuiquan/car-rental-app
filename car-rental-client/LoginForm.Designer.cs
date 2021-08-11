@@ -43,14 +43,14 @@ namespace car_rental_client
             // 
             this.account_text.Location = new System.Drawing.Point(60, 23);
             this.account_text.Name = "account_text";
-            this.account_text.Size = new System.Drawing.Size(202, 21);
+            this.account_text.Size = new System.Drawing.Size(221, 21);
             this.account_text.TabIndex = 0;
             // 
             // passwork_text
             // 
             this.passwork_text.Location = new System.Drawing.Point(59, 59);
             this.passwork_text.Name = "passwork_text";
-            this.passwork_text.Size = new System.Drawing.Size(203, 21);
+            this.passwork_text.Size = new System.Drawing.Size(222, 21);
             this.passwork_text.TabIndex = 1;
             this.passwork_text.UseSystemPasswordChar = true;
             // 
@@ -86,9 +86,9 @@ namespace car_rental_client
             // 
             this.administrator_login_button.Location = new System.Drawing.Point(149, 89);
             this.administrator_login_button.Name = "administrator_login_button";
-            this.administrator_login_button.Size = new System.Drawing.Size(61, 24);
+            this.administrator_login_button.Size = new System.Drawing.Size(80, 24);
             this.administrator_login_button.TabIndex = 4;
-            this.administrator_login_button.Text = "管理登录";
+            this.administrator_login_button.Text = "管理员登录";
             this.administrator_login_button.UseVisualStyleBackColor = true;
             this.administrator_login_button.Click += new System.EventHandler(this.administrator_login_button_Click);
             // 
@@ -104,7 +104,7 @@ namespace car_rental_client
             // 
             // quit_button
             // 
-            this.quit_button.Location = new System.Drawing.Point(216, 89);
+            this.quit_button.Location = new System.Drawing.Point(235, 89);
             this.quit_button.Name = "quit_button";
             this.quit_button.Size = new System.Drawing.Size(46, 24);
             this.quit_button.TabIndex = 5;
@@ -116,7 +116,7 @@ namespace car_rental_client
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(274, 135);
+            this.ClientSize = new System.Drawing.Size(295, 133);
             this.Controls.Add(this.quit_button);
             this.Controls.Add(this.visitor_login_button);
             this.Controls.Add(this.administrator_login_button);
