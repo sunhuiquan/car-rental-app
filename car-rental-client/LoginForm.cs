@@ -55,9 +55,9 @@ namespace car_rental_client
         }
 
         // 这个函数只是对登录结果进行解析并显示而已，登录实现看login
-        private void login_check(LOGIN_RESULT login_result)
+        private void login_check(RESPONSE_RESULT login_result)
         {
-            if (login_result == LOGIN_RESULT.LOGIN_SUCCESS)
+            if (login_result == RESPONSE_RESULT.LOGIN_SUCCESS)
             {
                 MessageBox.Show("登录成功");
 
@@ -67,11 +67,11 @@ namespace car_rental_client
             {
                 account_text.Clear();
                 passwork_text.Clear();
-                if (login_result == LOGIN_RESULT.ACCOUNT_NOT_FOUND)
+                if (login_result == RESPONSE_RESULT.ACCOUNT_NOT_FOUND)
                 {
                     MessageBox.Show("账号不存在");
                 }
-                else if (login_result == LOGIN_RESULT.PASSWORD_WRONG)
+                else if (login_result == RESPONSE_RESULT.PASSWORD_WRONG)
                 {
                     MessageBox.Show("密码错误");
                 }
