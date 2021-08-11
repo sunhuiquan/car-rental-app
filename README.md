@@ -56,9 +56,13 @@
 
 ### 使用演示
 
-**服务端运行:**
-
-1. [安装.NET](https://docs.microsoft.com/zh-cn/dotnet/core/install/),注意 .NET 在 2014 后开始跨平台移植了支持 linux，所以不用再需要 Mono 这个第三方提供环境了（当然 .NET 并没有那么强大，比如 Unity 不接受.NET5 因为里面有 bug 和没有实现的东西，用的就是 Mono）。
+1. 服务器上[安装.NET环境](https://docs.microsoft.com/zh-cn/dotnet/core/install/),注意 .NET 在 2014 后开始跨平台移植了支持 linux，所以不用再需要 Mono 这个第三方提供环境了（当然 .NET 并没有那么强大，比如 Unity 不接受.NET5 因为里面有 bug 和没有实现的东西，用的就是 Mono）。
+1. 服务器上安装MySQL并运行MySQL服务。  
+    ![IMG](./image/10.png)
+1. 服务器后台运行服务端程序(推荐成为一个守护进程，不过这里我至少单纯后台运行)。  
+    ![IMG](./image/x.png)
+1. 客户可以在windows环境下运行客户端程序(这里客户端没有跨平台，现在只支持windows)，然后通过程序窗体进行操作。  
+    ![IMG](./image/x.png)
 
 ---
 
