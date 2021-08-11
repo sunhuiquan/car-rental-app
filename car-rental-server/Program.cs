@@ -6,7 +6,7 @@ namespace car_rental_server
 	{
 		public static int Main(string[] args)
 		{
-			CarRentalServer.StartListening();
+			CarRentalServer.start_server();
 
 			return 0;
 		}

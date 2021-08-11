@@ -3,13 +3,27 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using MySql.Data.MySqlClient;
 
 namespace car_rental_server
 {
 	public class CarRentalServer
 	{
+		public static MySqlConnection conn_db;
 		private static Semaphore sem = new Semaphore(40, 40);
-		public static void StartListening()
+
+		public static void start_server()
+		{
+			// 连接数据库
+			if (connect_database() != 0)
+			{
+				return;
+			}
+			// 开始监听和多线程处理请求
+			StartListening();
+		}
+
+		private static void StartListening()
 		{
 			IPAddress ipAddress = IPAddress.Parse("0.0.0.0"); // 监听所有网卡
 			IPEndPoint localEndPoint = new IPEndPoint(ipAddress, 50000);
@@ -17,24 +31,17 @@ namespace car_rental_server
 			Socket listener = new Socket(ipAddress.AddressFamily,
 				SocketType.Stream, ProtocolType.Tcp);
 
-			try
-			{
-				listener.Bind(localEndPoint);
-				listener.Listen(10); // 未决连接数
+			listener.Bind(localEndPoint);
+			listener.Listen(10); // 未决连接数
 
-				while (true)
-				{
-					Socket handler = listener.Accept();
-					Console.WriteLine("Connect from " + ((IPEndPoint)handler.RemoteEndPoint).Address.ToString());
-
-					sem.WaitOne();
-					Thread thr = new Thread(new ParameterizedThreadStart(thread_handler));
-					thr.Start(handler);
-				}
-			}
-			catch (Exception e)
+			while (true)
 			{
-				Console.WriteLine(e.ToString());
+				Socket handler = listener.Accept();
+				Console.WriteLine("Connect from " + ((IPEndPoint)handler.RemoteEndPoint).Address.ToString());
+
+				sem.WaitOne();
+				Thread thr = new Thread(new ParameterizedThreadStart(thread_handler));
+				thr.Start(handler);
 			}
 		}
 
@@ -112,6 +119,22 @@ namespace car_rental_server
 			handler.Shutdown(SocketShutdown.Both);
 			handler.Close();
 			sem.Release();
+		}
+		private static int connect_database()
+		{
+			String connetStr = "server=8.136.218.156;user=user;database=car_rental_db;port=3306;password=password";
+			conn_db = new MySqlConnection(connetStr);
+			try
+			{
+				conn_db.Open();
+				Console.WriteLine("open successfully");
+			}
+			catch (MySqlException ex)
+			{
+				Console.WriteLine(ex.ToString());
+				return -1;
+			}
+			return 0;
 		}
 	}
 }

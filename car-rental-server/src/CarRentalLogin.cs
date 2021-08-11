@@ -1,8 +1,7 @@
 using System;
-using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
+using MySql.Data.MySqlClient;
 
 namespace car_rental_server
 {
@@ -21,8 +20,16 @@ namespace car_rental_server
 				}
 				else if (request_array[1].Equals("USER"))
 				{
+					string sql = "SELECT account, password FROM user";
+					MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+					// MySqlDataReader rdr = cmd.ExecuteReader();
+
+					// while (rdr.Read())
+					// {
+					// 	Console.WriteLine(rdr[0] + " -- " + rdr[1]);
+					// }
+					// rdr.Close();
 					return -1;
-					// to do
 				}
 				else if (request_array[1].Equals("ADMINISTRATOR"))
 				{
