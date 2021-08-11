@@ -45,6 +45,7 @@
 1. 登录请求：**ACCOUNT TYPE \[account\] \[password\] \r\n**
    - TYPE 是登录类型，指游客(VISITOR)、用户(USER)、管理员(ADMINISTRATOR)
    - account 和 password 是具体账号密码，可选项(非游客才需要)
+<!-- 1. REGISTER to do -->
 1. 各种各样的响应：**RESPONSE \r\n**
    - 登录响应:
      - LOGIN_SUCCESS(登录成功)
