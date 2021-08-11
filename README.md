@@ -45,11 +45,14 @@
 1. 登录请求：**ACCOUNT TYPE \[account\] \[password\] \r\n**
    - TYPE 是登录类型，指游客(VISITOR)、用户(USER)、管理员(ADMINISTRATOR)
    - account 和 password 是具体账号密码，可选项(非游客才需要)
-1. 登录响应：**RESPONSE \r\n**
-   - LOGIN_SUCCESS(登录成功)
-   - ACCOUNT_NOT_FOUND(无该账号)
-   - PASSWORD_WRONG(密码错误)
-   - OTHER_WRONG(其他错误如网络或服务器的错误)
+<!-- 1. REGISTER to do -->
+1. 各种各样的响应：**RESPONSE \r\n**
+   - 登录响应:
+     - LOGIN_SUCCESS(登录成功)
+     - ACCOUNT_NOT_FOUND(登陆失败无该账号)
+     - PASSWORD_WRONG(登录失败密码错误)
+   - 通用响应:
+     - OTHER_WRONG(其他错误如网络或服务器的错误)
    <!-- to do to do to do to do to do to do -->
 
 ---

@@ -2,11 +2,11 @@ using System;
 
 namespace car_rental_client
 {
-    public enum LOGIN_RESULT { LOGIN_SUCCESS, ACCOUNT_NOT_FOUND, PASSWORD_WRONG, OTHER_WRONG }
+    public enum RESPONSE_RESULT { LOGIN_SUCCESS, ACCOUNT_NOT_FOUND, PASSWORD_WRONG, OTHER_WRONG = 255 }
 
     public class CarRentalLogin
     {
-        public static LOGIN_RESULT login(LOGIN_TYPE type, string account = "", string password = "")
+        public static RESPONSE_RESULT login(LOGIN_TYPE type, string account = "", string password = "")
         {
             // 登录报文格式：
             // ACCOUNT TYPE \[account\] \[password\] \r\n
@@ -27,17 +27,17 @@ namespace car_rental_client
             int is_closed = 0;
             string result = CarRentalClient.receive(ref is_closed);
             if (result == null || is_closed == 1)
-                return LOGIN_RESULT.OTHER_WRONG;
+                return RESPONSE_RESULT.OTHER_WRONG;
 
             string[] result_arrays = result.Split(' ');
             if (result_arrays[0].Equals("LOGIN_SUCCESS"))
-                return LOGIN_RESULT.LOGIN_SUCCESS;
+                return RESPONSE_RESULT.LOGIN_SUCCESS;
             else if (result_arrays[0].Equals("ACCOUNT_NOT_FOUND"))
-                return LOGIN_RESULT.ACCOUNT_NOT_FOUND;
+                return RESPONSE_RESULT.ACCOUNT_NOT_FOUND;
             else if (result_arrays[0].Equals("PASSWORD_WRONG"))
-                return LOGIN_RESULT.PASSWORD_WRONG;
+                return RESPONSE_RESULT.PASSWORD_WRONG;
             else
-                return LOGIN_RESULT.OTHER_WRONG;
+                return RESPONSE_RESULT.OTHER_WRONG;
         }
     }
 }
