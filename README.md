@@ -48,13 +48,18 @@
 1. 注册请求：
    - **REGISTER ACCOUNT PASSWORD USERNAME PHONE \r\n**
    - **二进制图像信息 \r\n**
+1. 浏览车位信息请求：
+   - **LIST \r\n**
 1. 各种各样的响应：**RESPONSE \r\n**
    - 登录响应:
      - LOGIN_SUCCESS(登录成功)
      - ACCOUNT_NOT_FOUND(登陆失败无该账号)
      - PASSWORD_WRONG(登录失败密码错误)
-   - 注册响应
+   - 注册响应:
      - REGISTER_SUCCESS(注册请求发送成功(待审批))
+   - 浏览车位信息响应:
+     - 首先是一直发回**一条信息 \r\n**
+   - 最后说明结束**LIST_END \r\n**
    - 通用响应:
      - OTHER_WRONG(其他错误如网络或服务器的错误)
      <!-- to do to do to do to do to do to do -->

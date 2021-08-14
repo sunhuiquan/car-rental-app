@@ -49,6 +49,7 @@
     <Compile Include="CarRentalClient.cs" />
     <Compile Include="CarRentalLogin.cs" />
     <Compile Include="CarRentalRegister.cs" />
+    <Compile Include="CarRentalSearch.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +63,12 @@
     </Compile>
     <Compile Include="RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VistorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VistorForm.Designer.cs">
+      <DependentUpon>VistorForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -77,6 +84,9 @@
     </Compile>
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VistorForm.resx">
+      <DependentUpon>VistorForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
