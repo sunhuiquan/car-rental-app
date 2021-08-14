@@ -75,7 +75,7 @@ namespace car_rental_server
 					// 功能解析
 					if (request_array[0].Equals("ACCOUNT"))
 					{
-						if (check_login_num(num, request_array) == 0)
+						if (check_login_num(num, request_array) == 0 && !is_login)
 						{
 							if (CarRentalLogin.login(request_array, handler) == 0)
 								is_login = true; // 登陆成功
@@ -87,7 +87,13 @@ namespace car_rental_server
 					}
 					else if (request_array[0].Equals("REGISTER"))
 					{
+						if (is_login || num != 6)
+							handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
 
+						if (CarRentalRegister.register(handler, request_array) == 0)
+							handler.Send(Encoding.ASCII.GetBytes("REGISTER_SUCCESS \r\n"));
+						else
+							handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
 					}
 					else if (is_login && request_array[0].Equals(""))
 					{
@@ -172,7 +178,7 @@ namespace car_rental_server
 		}
 		private static int connect_database()
 		{
-			String connetStr = "server=8.136.218.156;user=user;database=car_rental_db;port=3306;password=password";
+			String connetStr = "server=8.136.218.156;user=user;database=db;port=3306;password=password";
 			conn_db = new MySqlConnection(connetStr);
 			try
 			{
