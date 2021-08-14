@@ -7,8 +7,11 @@ namespace car_rental_client
 
     public partial class LoginForm : Form
     {
+        public static LoginForm login_form = null;
+
         public LoginForm()
         {
+            login_form = this;
             InitializeComponent();
         }
 
@@ -87,6 +90,13 @@ namespace car_rental_client
         {
             CarRentalClient.close();
             Application.Exit();
+        }
+
+        private void register_button_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            RegisterForm rf = new RegisterForm();
+            rf.Show();
         }
     }
 }

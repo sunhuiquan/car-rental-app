@@ -37,20 +37,21 @@ namespace car_rental_client
             this.administrator_login_button = new System.Windows.Forms.Button();
             this.visitor_login_button = new System.Windows.Forms.Button();
             this.quit_button = new System.Windows.Forms.Button();
+            this.register_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // account_text
             // 
             this.account_text.Location = new System.Drawing.Point(60, 23);
             this.account_text.Name = "account_text";
-            this.account_text.Size = new System.Drawing.Size(221, 21);
+            this.account_text.Size = new System.Drawing.Size(169, 21);
             this.account_text.TabIndex = 0;
             // 
             // passwork_text
             // 
             this.passwork_text.Location = new System.Drawing.Point(59, 59);
             this.passwork_text.Name = "passwork_text";
-            this.passwork_text.Size = new System.Drawing.Size(222, 21);
+            this.passwork_text.Size = new System.Drawing.Size(170, 21);
             this.passwork_text.TabIndex = 1;
             this.passwork_text.UseSystemPasswordChar = true;
             // 
@@ -104,7 +105,7 @@ namespace car_rental_client
             // 
             // quit_button
             // 
-            this.quit_button.Location = new System.Drawing.Point(235, 89);
+            this.quit_button.Location = new System.Drawing.Point(235, 59);
             this.quit_button.Name = "quit_button";
             this.quit_button.Size = new System.Drawing.Size(46, 24);
             this.quit_button.TabIndex = 5;
@@ -112,11 +113,22 @@ namespace car_rental_client
             this.quit_button.UseVisualStyleBackColor = true;
             this.quit_button.Click += new System.EventHandler(this.quit_button_Click);
             // 
+            // register_button
+            // 
+            this.register_button.Location = new System.Drawing.Point(235, 21);
+            this.register_button.Name = "register_button";
+            this.register_button.Size = new System.Drawing.Size(46, 23);
+            this.register_button.TabIndex = 6;
+            this.register_button.Text = "注册";
+            this.register_button.UseVisualStyleBackColor = true;
+            this.register_button.Click += new System.EventHandler(this.register_button_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(295, 133);
+            this.ClientSize = new System.Drawing.Size(285, 133);
+            this.Controls.Add(this.register_button);
             this.Controls.Add(this.quit_button);
             this.Controls.Add(this.visitor_login_button);
             this.Controls.Add(this.administrator_login_button);
@@ -144,5 +156,6 @@ namespace car_rental_client
         private System.Windows.Forms.Button administrator_login_button;
         private System.Windows.Forms.Button visitor_login_button;
         private System.Windows.Forms.Button quit_button;
+        private System.Windows.Forms.Button register_button;
     }
 }
