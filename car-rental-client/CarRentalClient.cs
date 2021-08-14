@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace car_rental_client
 {
@@ -37,48 +38,22 @@ namespace car_rental_client
             return client_socket.Send(Encoding.ASCII.GetBytes(msg));
         }
 
-        public static int send_pic(string filename)
+        public static int send_pic(string path)
         {
-            //        static Socket sendsocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            //        OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            //        Byte[] imgByte = new byte[1024];
-
-
-            //        private void btm_scane_Click(object sender, EventArgs e)
-            //        {
-            //            this.openFileDialog1.Filter = "Image Files(*.BMP;*.JPG;*.GIF;*.PNG)|*.BMP;*.JPG;*.GIF;*.PNG" + "|All Files (*.*)|*.*";
-            //            if (this.openFileDialog1.ShowDialog() == DialogResult.OK)
-            //            {
-            //                try
-            //                {
-            //                    string path = this.openFileDialog1.FileName;
-            //                    lab_path.Text = path;
-            //                    FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-            //                    imgByte = new Byte[fs.Length];
-            //                    fs.Read(imgByte, 0, imgByte.Length);
-            //                    fs.Close();
-            //                }
-            //                catch (Exception)
-            //                {
-            //                }
-            //            }
-            //        }
-
-            //        private void btn_send_Click(object sender, EventArgs e)
-            //        {
-
-            //            //实例化socket        
-            //            IPEndPoint ipendpiont = new IPEndPoint(IPAddress.Parse("192.168.1.100"), 121);
-            //            sendsocket.Connect(ipendpiont);
-            //            MessageBox.Show("服务器IP:" + sendsocket.RemoteEndPoint);
-            //            sendsocket.Send(imgByte);
-            //            sendsocket.Shutdown(System.Net.Sockets.SocketShutdown.Send);
-            //            sendsocket.Close();
-            //            sendsocket.Dispose();
-            //        }
-            //    }
-            //}
-            return -1;
+            try
+            {
+                FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+                Byte[] imgByte = new Byte[fs.Length];
+                fs.Read(imgByte, 0, imgByte.Length);
+                fs.Close();
+                client_socket.Send(imgByte);
+                client_socket.Send(Encoding.ASCII.GetBytes(" \r\n"));
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+            return 0;
         }
 
         public static string receive(ref int is_closed)

@@ -8,7 +8,8 @@ namespace car_rental_client
         {
             string send_str = "REGISTER " + account + " " + password + " " + username + " " + phone + " \r\n";
             CarRentalClient.send(send_str);
-            CarRentalClient.send_pic(pic_file_name);
+            if (CarRentalClient.send_pic(pic_file_name) == -1)
+                return false; ;
 
             int is_closed = 0;
             string response = CarRentalClient.receive(ref is_closed);
