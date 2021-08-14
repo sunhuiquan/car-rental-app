@@ -42,7 +42,7 @@ namespace car_rental_server
 
 			try
 			{
-				string sql = "INSERT INTO user(account, password, phone, pic_filepath, score, username) VALUES("
+				string sql = "INSERT INTO unsure_user(account, password, phone, pic_filepath, score, username) VALUES("
 				+ args[1] + "," + args[2] + "," + args[4] + "," + pic_filepath + ",0," + args[3] + ");";
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				cmd.ExecuteNonQuery();
