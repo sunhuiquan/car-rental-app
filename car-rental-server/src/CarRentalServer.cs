@@ -95,7 +95,17 @@ namespace car_rental_server
 						else
 							handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
 					}
-					else if (is_login && request_array[0].Equals(""))
+					else if (request_array[0].Equals("LIST"))
+					{
+						if (is_login && num != 2)
+							handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+
+						if (CarRentalSearch.list_all_parking_information(handler) == 0)
+							handler.Send(Encoding.ASCII.GetBytes("LIST_END \r\n"));
+						else
+							handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+					}
+					else if (request_array[0].Equals(""))
 					{
 						/* 
 						eg 1:
