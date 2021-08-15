@@ -111,7 +111,7 @@ namespace car_rental_server
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 
 						if (CarRentalSearch.search_parking_information(handler, request_array) == 0)
-							handler.Send(Encoding.UTF8.GetBytes("LIST_END \r\n"));
+							handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
 						else
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 					}

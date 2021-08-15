@@ -41,11 +41,11 @@ namespace car_rental_server
 
 				if (!args[1].Equals("NULL"))
 				{
-					temps[i++] = "%" + args[1] + "%";
+					temps[i++] = "location like '%" + args[1] + "%'";
 				}
 				if (!args[2].Equals("NULL"))
 				{
-					temps[i++] = "free_time <=" + args[2];
+					temps[i++] = "free_time <= '" + args[2] + "' and free_time_end > '" + args[2] + "'";
 				}
 				if (!args[3].Equals("NULL"))
 				{
@@ -53,13 +53,13 @@ namespace car_rental_server
 				}
 				if (!args[4].Equals("NULL"))
 				{
-					temps[i++] = "price <=" + args[4];
+					temps[i++] = "price <= " + args[4];
 				}
 
 				for (int j = 0; j < i; ++j)
 				{
 					if (j != i - 1)
-						where_str += temps[j] + "and";
+						where_str += temps[j] + " and ";
 					else
 						where_str += temps[j];
 				}
@@ -72,7 +72,6 @@ namespace car_rental_server
 				else
 				{
 					sql = "SELECT location,price,free_time,free_time_end,id FROM parking WHERE " + where_str;
-					sql += where_str;
 				}
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				MySqlDataReader rdr = cmd.ExecuteReader();
