@@ -12,9 +12,11 @@ namespace car_rental_client
 {
     public partial class user_view : Form
     {
+        public static user_view uv_form = null;
         public user_view()
         {
             InitializeComponent();
+            uv_form = this;
         }
 
         private void list_parking_information_button_Click(object sender, EventArgs e)
@@ -73,6 +75,13 @@ namespace car_rental_client
                     informatino_listview.Items.Add(item);
                 }
             }
+        }
+
+        private void release_parking_button_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            rental_form rf = new rental_form();
+            rf.Show();
         }
     }
 }

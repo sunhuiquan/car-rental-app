@@ -66,6 +66,8 @@ namespace car_rental_client
             this.label11 = new System.Windows.Forms.Label();
             this.money = new System.Windows.Forms.Label();
             this.charge_button = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.position_label = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // list_parking_information_button
@@ -292,8 +294,9 @@ namespace car_rental_client
             this.release_parking_button.Name = "release_parking_button";
             this.release_parking_button.Size = new System.Drawing.Size(136, 23);
             this.release_parking_button.TabIndex = 22;
-            this.release_parking_button.Text = "发布订单(进入新窗口)";
+            this.release_parking_button.Text = "出租车位(进入新窗口)";
             this.release_parking_button.UseVisualStyleBackColor = true;
+            this.release_parking_button.Click += new System.EventHandler(this.release_parking_button_Click);
             // 
             // buy_button
             // 
@@ -371,11 +374,30 @@ namespace car_rental_client
             this.charge_button.Text = "充值";
             this.charge_button.UseVisualStyleBackColor = true;
             // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(213, 114);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(41, 12);
+            this.label12.TabIndex = 32;
+            this.label12.Text = "身份：";
+            // 
+            // position_label
+            // 
+            this.position_label.AutoSize = true;
+            this.position_label.Location = new System.Drawing.Point(275, 114);
+            this.position_label.Name = "position_label";
+            this.position_label.Size = new System.Drawing.Size(0, 12);
+            this.position_label.TabIndex = 33;
+            // 
             // user_view
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 659);
+            this.Controls.Add(this.position_label);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.charge_button);
             this.Controls.Add(this.money);
             this.Controls.Add(this.label11);
@@ -453,5 +475,7 @@ namespace car_rental_client
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label money;
         private System.Windows.Forms.Button charge_button;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label position_label;
     }
 }
