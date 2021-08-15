@@ -35,7 +35,7 @@ namespace car_rental_client
 
         public static int send(string msg)
         {
-            return client_socket.Send(Encoding.ASCII.GetBytes(msg));
+            return client_socket.Send(Encoding.UTF8.GetBytes(msg));
         }
 
         public static int send_pic(string path)
@@ -47,7 +47,7 @@ namespace car_rental_client
                 fs.Read(imgByte, 0, imgByte.Length);
                 fs.Close();
                 client_socket.Send(imgByte);
-                client_socket.Send(Encoding.ASCII.GetBytes(" \r\n"));
+                client_socket.Send(Encoding.UTF8.GetBytes(" \r\n"));
             }
             catch (Exception)
             {
@@ -71,7 +71,6 @@ namespace car_rental_client
                     is_closed = 1;
                     break;
                 }
-                //request += Encoding.ASCII.GetString(bytes, 0, bytesRec);
                 request += Encoding.UTF8.GetString(bytes, 0, bytesRec);
                 if (request.IndexOf("\r\n") > -1)
                     break;
