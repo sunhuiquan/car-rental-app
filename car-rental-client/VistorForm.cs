@@ -25,6 +25,7 @@ namespace car_rental_client
 
         private void parking_information_button_Click(object sender, EventArgs e)
         {
+            information_view.Items.Clear();
             string[] parking_information_array = CarRentalSearch.list_parking_information();
             if (parking_information_array == null)
             {
