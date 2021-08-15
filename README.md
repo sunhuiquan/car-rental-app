@@ -53,7 +53,7 @@
 1. 搜索请求：
    - **SEARCH LOCATION TIME_START DAYS PRICE \r\n**（没有就是NULL）
 1. 出租请求：
-   - **RENTAL TIME_START TIME_END PRICE \r\n**
+   - **RENTAL LOCATION TIME_START TIME_END PRICE \r\n**
 1. 各种各样的响应：**RESPONSE \r\n**
    - 登录响应:
      - LOGIN_SUCCESS(登录成功)

@@ -29,7 +29,21 @@ namespace car_rental_client
                 textBox2.Text == null || textBox2.Text.Length == 0 ||
                 textBox3.Text == null || textBox3.Text.Length == 0 ||
                 textBox4.Text == null || textBox4.Text.Length == 0)
+            {
                 MessageBox.Show("信息不能为空");
+                return;
+            }
+
+            string[] t1 = textBox2.Text.Split('-');
+            string[] t2 = textBox3.Text.Split('-');
+
+            if ((int.Parse(t1[0]) > int.Parse(t2[0])) ||
+               (int.Parse(t1[0]) == int.Parse(t2[0]) && int.Parse(t1[1]) > int.Parse(t2[1])) ||
+               (int.Parse(t1[0]) == int.Parse(t2[0]) && int.Parse(t1[1]) == int.Parse(t2[1]) && int.Parse(t1[2]) > int.Parse(t2[2])))
+            {
+                MessageBox.Show("开始日期不能小于出租日期");
+                return;
+            }
 
             string str = "RENTAL ";
             str += textBox1.Text + " " + textBox2.Text + " " +
