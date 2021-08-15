@@ -11,14 +11,13 @@ namespace car_rental_server
 		{
 			try
 			{
-				string sql = "SELECT location,price,free_time,free_time_end FROM parking";
+				string sql = "SELECT location,price,free_time,free_time_end,id FROM parking";
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				MySqlDataReader rdr = cmd.ExecuteReader();
 				while (rdr.Read()) // 一行一行地读
 				{
-					Console.WriteLine(rdr[0]);
 					handler.Send(Encoding.UTF8.GetBytes(
-						rdr[0] + " " + rdr[1] + " " + rdr[2] + " " + rdr[3] + "|"));
+						rdr[0] + " " + rdr[1] + " " + rdr[2] + " " + rdr[3] + " " + rdr[4] + "|"));
 				}
 				rdr.Close();
 			}
