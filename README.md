@@ -50,6 +50,8 @@
    - **二进制图像信息 \r\n**
 1. 浏览车位信息请求：
    - **LIST \r\n**
+1. 搜索请求：
+   - **SEARCH LOCATION TIME_START DAYS PRICE \r\n**（没有就是NULL）
 1. 各种各样的响应：**RESPONSE \r\n**
    - 登录响应:
      - LOGIN_SUCCESS(登录成功)
@@ -61,7 +63,8 @@
      - 首先是一直发回**对应的信息以|分隔不同消息**
      - 最后说明结束**LIST_END \r\n**
    - 通用响应:
-     - OTHER_WRONG(其他错误如网络或服务器的错误)
+     - **SUCCESS \r\n**
+     - **OTHER_WRONG \r\n**(其他错误如网络或服务器的错误)
      <!-- to do to do to do to do to do to do -->
 
 ---

@@ -32,11 +32,11 @@ namespace car_rental_client
             this.list_parking_information_button = new System.Windows.Forms.Button();
             this.go_back_button = new System.Windows.Forms.Button();
             this.search_button = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.location_text = new System.Windows.Forms.TextBox();
+            this.rent_days_text = new System.Windows.Forms.TextBox();
+            this.time_strat_text = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.price_text = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -96,27 +96,28 @@ namespace car_rental_client
             this.search_button.TabIndex = 2;
             this.search_button.Text = "查询按钮";
             this.search_button.UseVisualStyleBackColor = true;
+            this.search_button.Click += new System.EventHandler(this.search_button_Click);
             // 
-            // textBox1
+            // location_text
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 24);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(167, 21);
-            this.textBox1.TabIndex = 3;
+            this.location_text.Location = new System.Drawing.Point(13, 24);
+            this.location_text.Name = "location_text";
+            this.location_text.Size = new System.Drawing.Size(167, 21);
+            this.location_text.TabIndex = 3;
             // 
-            // textBox2
+            // rent_days_text
             // 
-            this.textBox2.Location = new System.Drawing.Point(12, 106);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(168, 21);
-            this.textBox2.TabIndex = 4;
+            this.rent_days_text.Location = new System.Drawing.Point(12, 106);
+            this.rent_days_text.Name = "rent_days_text";
+            this.rent_days_text.Size = new System.Drawing.Size(168, 21);
+            this.rent_days_text.TabIndex = 4;
             // 
-            // textBox3
+            // time_strat_text
             // 
-            this.textBox3.Location = new System.Drawing.Point(12, 67);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(168, 21);
-            this.textBox3.TabIndex = 5;
+            this.time_strat_text.Location = new System.Drawing.Point(12, 67);
+            this.time_strat_text.Name = "time_strat_text";
+            this.time_strat_text.Size = new System.Drawing.Size(168, 21);
+            this.time_strat_text.TabIndex = 5;
             // 
             // label1
             // 
@@ -127,12 +128,12 @@ namespace car_rental_client
             this.label1.TabIndex = 6;
             this.label1.Text = "位置(可少不可多写)";
             // 
-            // textBox4
+            // price_text
             // 
-            this.textBox4.Location = new System.Drawing.Point(12, 149);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(168, 21);
-            this.textBox4.TabIndex = 7;
+            this.price_text.Location = new System.Drawing.Point(12, 149);
+            this.price_text.Name = "price_text";
+            this.price_text.Size = new System.Drawing.Size(168, 21);
+            this.price_text.TabIndex = 7;
             // 
             // label2
             // 
@@ -181,7 +182,7 @@ namespace car_rental_client
             // id
             // 
             this.id.Text = "id";
-            this.id.Width = 29;
+            this.id.Width = 99;
             // 
             // location
             // 
@@ -398,11 +399,11 @@ namespace car_rental_client
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.price_text);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.time_strat_text);
+            this.Controls.Add(this.rent_days_text);
+            this.Controls.Add(this.location_text);
             this.Controls.Add(this.search_button);
             this.Controls.Add(this.go_back_button);
             this.Controls.Add(this.list_parking_information_button);
@@ -418,11 +419,11 @@ namespace car_rental_client
         private System.Windows.Forms.Button list_parking_information_button;
         private System.Windows.Forms.Button go_back_button;
         private System.Windows.Forms.Button search_button;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox location_text;
+        private System.Windows.Forms.TextBox rent_days_text;
+        private System.Windows.Forms.TextBox time_strat_text;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.TextBox price_text;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
