@@ -83,5 +83,12 @@ namespace car_rental_client
             rental_form rf = new rental_form();
             rf.Show();
         }
+
+        private void charge_button_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            chage_form cf = new chage_form();
+            cf.Show();
+        }
     }
 }

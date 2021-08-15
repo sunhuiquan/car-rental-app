@@ -373,6 +373,7 @@ namespace car_rental_client
             this.charge_button.TabIndex = 31;
             this.charge_button.Text = "充值";
             this.charge_button.UseVisualStyleBackColor = true;
+            this.charge_button.Click += new System.EventHandler(this.charge_button_Click);
             // 
             // label12
             // 

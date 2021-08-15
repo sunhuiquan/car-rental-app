@@ -52,6 +52,12 @@
     <Compile Include="admin_view.Designer.cs">
       <DependentUpon>admin_view.cs</DependentUpon>
     </Compile>
+    <Compile Include="chage_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="chage_form.Designer.cs">
+      <DependentUpon>chage_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +96,9 @@
     </Compile>
     <EmbeddedResource Include="admin_view.resx">
       <DependentUpon>admin_view.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="chage_form.resx">
+      <DependentUpon>chage_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
