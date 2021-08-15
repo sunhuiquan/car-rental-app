@@ -58,8 +58,8 @@
    - 注册响应:
      - REGISTER_SUCCESS(注册请求发送成功(待审批))
    - 浏览车位信息响应:
-     - 首先是一直发回**一条信息 \r\n**
-   - 最后说明结束**LIST_END \r\n**
+     - 首先是一直发回**对应的信息以|分隔不同消息**
+     - 最后说明结束**LIST_END \r\n**
    - 通用响应:
      - OTHER_WRONG(其他错误如网络或服务器的错误)
      <!-- to do to do to do to do to do to do -->

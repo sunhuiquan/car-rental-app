@@ -33,9 +33,9 @@ namespace car_rental_client
             this.parking_information_button = new System.Windows.Forms.Button();
             this.information_view = new System.Windows.Forms.ListView();
             this.location = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.time_start = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.time_end = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.price = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // back_button
@@ -78,22 +78,20 @@ namespace car_rental_client
             this.location.Text = "车位位置";
             this.location.Width = 283;
             // 
+            // price
+            // 
+            this.price.Text = "价格(天）";
+            this.price.Width = 77;
+            // 
             // time_start
             // 
-            this.time_start.DisplayIndex = 1;
             this.time_start.Text = "空闲时间起点";
             this.time_start.Width = 101;
             // 
             // time_end
             // 
-            this.time_end.DisplayIndex = 2;
             this.time_end.Text = "空闲时间终点";
             this.time_end.Width = 127;
-            // 
-            // price
-            // 
-            this.price.Text = "价格(小时)";
-            this.price.Width = 77;
             // 
             // VistorForm
             // 

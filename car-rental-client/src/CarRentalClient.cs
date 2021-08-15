@@ -71,7 +71,8 @@ namespace car_rental_client
                     is_closed = 1;
                     break;
                 }
-                request += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                //request += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                request += Encoding.UTF8.GetString(bytes, 0, bytesRec);
                 if (request.IndexOf("\r\n") > -1)
                     break;
             }

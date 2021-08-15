@@ -46,10 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CarRentalClient.cs" />
-    <Compile Include="CarRentalLogin.cs" />
-    <Compile Include="CarRentalRegister.cs" />
-    <Compile Include="CarRentalSearch.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +60,10 @@
     <Compile Include="RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="src\CarRentalClient.cs" />
+    <Compile Include="src\CarRentalLogin.cs" />
+    <Compile Include="src\CarRentalRegister.cs" />
+    <Compile Include="src\CarRentalSearch.cs" />
     <Compile Include="VistorForm.cs">
       <SubType>Form</SubType>
     </Compile>
