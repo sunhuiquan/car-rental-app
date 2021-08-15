@@ -68,7 +68,7 @@ namespace car_rental_server
 				// 解析指令 /r/n必有，一个功能说明必有，至少是2
 				if (num < 2)
 				{
-					handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+					handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 				}
 				else
 				{
@@ -82,28 +82,28 @@ namespace car_rental_server
 						}
 						else
 						{
-							handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						}
 					}
 					else if (request_array[0].Equals("REGISTER"))
 					{
 						if (is_login || num != 6)
-							handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 
 						if (CarRentalRegister.register(handler, request_array) == 0)
-							handler.Send(Encoding.ASCII.GetBytes("REGISTER_SUCCESS \r\n"));
+							handler.Send(Encoding.UTF8.GetBytes("REGISTER_SUCCESS \r\n"));
 						else
-							handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 					}
 					else if (request_array[0].Equals("LIST"))
 					{
 						if (is_login && num != 2)
-							handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 
 						if (CarRentalSearch.list_all_parking_information(handler) == 0)
-							handler.Send(Encoding.ASCII.GetBytes("LIST_END \r\n"));
+							handler.Send(Encoding.UTF8.GetBytes("LIST_END \r\n"));
 						else
-							handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 					}
 					else if (request_array[0].Equals(""))
 					{
@@ -127,7 +127,7 @@ namespace car_rental_server
 					}
 					else
 					{
-						handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+						handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 					}
 				}
 			}
@@ -162,7 +162,7 @@ namespace car_rental_server
 					is_closed = 1;
 					break;
 				}
-				request += Encoding.ASCII.GetString(bytes, 0, bytesRec);
+				request += Encoding.UTF8.GetString(bytes, 0, bytesRec);
 				if (request.IndexOf("\r\n") > -1)
 					break;
 			}

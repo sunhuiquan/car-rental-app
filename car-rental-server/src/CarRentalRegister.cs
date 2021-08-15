@@ -27,7 +27,7 @@ namespace car_rental_server
 			//每次只能读取小于等于缓冲区的大小
 			while ((length = handler.Receive(b)) > 0)
 			{
-				string request = Encoding.ASCII.GetString(b, 0, length);
+				string request = Encoding.UTF8.GetString(b, 0, length);
 				if (request.IndexOf("\r\n") > -1)
 				{
 					fs.Write(b, 0, length - 5); // 少读" \r\n"这五个字节

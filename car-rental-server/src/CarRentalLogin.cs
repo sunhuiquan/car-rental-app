@@ -14,14 +14,14 @@ namespace car_rental_server
 			{
 				// 游客不需要检查账号密码也要通过socket请求，
 				// 一是为了确保已经产生了处理线程，二也是为了拓展性
-				handler.Send(Encoding.ASCII.GetBytes("LOGIN_SUCCESS \r\n"));
+				handler.Send(Encoding.UTF8.GetBytes("LOGIN_SUCCESS \r\n"));
 				return 0;
 			}
 			else if (request_array[1].Equals("USER"))
 			{
 				string sql = "SELECT account, password FROM user";
 				string result = check_login(sql, request_array[2], request_array[3]);
-				handler.Send(Encoding.ASCII.GetBytes(result));
+				handler.Send(Encoding.UTF8.GetBytes(result));
 
 				if (result.Equals("LOGIN_SUCCESS \r\n"))
 					return 0;
@@ -31,7 +31,7 @@ namespace car_rental_server
 			{
 				string sql = "SELECT account, password FROM administer";
 				string result = check_login(sql, request_array[2], request_array[3]);
-				handler.Send(Encoding.ASCII.GetBytes(result));
+				handler.Send(Encoding.UTF8.GetBytes(result));
 
 				if (result.Equals("LOGIN_SUCCESS \r\n"))
 					return 0;
@@ -39,7 +39,7 @@ namespace car_rental_server
 			}
 			else
 			{
-				handler.Send(Encoding.ASCII.GetBytes("OTHER_WRONG \r\n"));
+				handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 				return -1;
 			}
 		}

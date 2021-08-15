@@ -17,7 +17,7 @@ namespace car_rental_server
 				while (rdr.Read()) // 一行一行地读
 				{
 					Console.WriteLine(rdr[0]);
-					handler.Send(Encoding.ASCII.GetBytes(
+					handler.Send(Encoding.UTF8.GetBytes(
 						rdr[0] + " " + rdr[1] + " " + rdr[2] + " " + rdr[3] + "|"));
 				}
 				rdr.Close();
