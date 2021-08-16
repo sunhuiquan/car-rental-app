@@ -167,10 +167,36 @@ namespace car_rental_server
 								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						}
 					}
+					else if (request_array[0].Equals("BAN_USER"))
+					{
+						// BAN_USER ACCOUNT \r\n
+						if (!is_login || num != 3)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							if (CarRentalUser.ban_user(handler, request_array[1]) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
+					else if (request_array[0].Equals("BAN_PARKING"))
+					{
+						// BAN_PARKING ID \r\n
+						if (!is_login || num != 3)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							if (CarRentalUser.ban_parking(handler, request_array[1]) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
 					// else if (request_array[0].Equals(""))
-					// { }
+					// {}
 					// else if (request_array[0].Equals(""))
-					// { }
+					// {}
 					// else if (request_array[0].Equals(""))
 					// {
 					// 	/* 

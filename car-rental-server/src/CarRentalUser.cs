@@ -78,5 +78,37 @@ namespace car_rental_server
 			}
 			return 0;
 		}
+
+		public static int ban_user(Socket handler, string account)
+		{
+			try
+			{
+				string sql = "DELETE FROM user WHERE account='" + account + "';";
+				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				cmd.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+				return -1;
+			}
+			return 0;
+		}
+
+		public static int ban_parking(Socket handler, string id)
+		{
+			try
+			{
+				string sql = "DELETE FROM parking WHERE id='" + id + "';";
+				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				cmd.ExecuteNonQuery();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+				return -1;
+			}
+			return 0;
+		}
 	}
 }
