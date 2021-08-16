@@ -155,26 +155,42 @@ namespace car_rental_server
 						else if (CarRentalUser.get_user_information(handler, request_array) != 0)
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 					}
-					else if (request_array[0].Equals(""))
+					else if (request_array[0].Equals("LIST_USER"))
 					{
-						/* 
-						eg 1:
-						string sql = "SELECT 查询语句";
-						MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
-						MySqlDataReader rdr = cmd.ExecuteReader();
-						while (rdr.Read()) // 一行一行地读
+						if (!is_login || num != 2)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
 						{
-							Console.WriteLine(rdr[0] + " -- " + rdr[1]);
-							// [0] [1] 分别对应第一列属性 第二列属性
+							if (CarRentalUser.list_all_user_information(handler) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("LIST_USER_END \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						}
-						rdr.Close();
-						 
-						eg 2:
-						string sql = "INSERT 非查询语句比如插入、删除之类";
-						MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
-						cmd.ExecuteNonQuery();
-						*/
 					}
+					// else if (request_array[0].Equals(""))
+					// { }
+					// else if (request_array[0].Equals(""))
+					// { }
+					// else if (request_array[0].Equals(""))
+					// {
+					// 	/* 
+					// 	eg 1:
+					// 	string sql = "SELECT 查询语句";
+					// 	MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+					// 	MySqlDataReader rdr = cmd.ExecuteReader();
+					// 	while (rdr.Read()) // 一行一行地读
+					// 	{
+					// 		Console.WriteLine(rdr[0] + " -- " + rdr[1]);
+					// 		// [0] [1] 分别对应第一列属性 第二列属性
+					// 	}
+					// 	rdr.Close();
+
+					// 	eg 2:
+					// 	string sql = "INSERT 非查询语句比如插入、删除之类";
+					// 	MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+					// 	cmd.ExecuteNonQuery();
+					// 	*/
+					// }
 					else
 					{
 						handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));

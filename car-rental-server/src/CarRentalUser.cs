@@ -56,5 +56,27 @@ namespace car_rental_server
 			}
 			return 0;
 		}
+
+		public static int list_all_user_information(Socket handler)
+		{
+			try
+			{
+				string sql = "SELECT account, username, phone, money, score FROM user";
+				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				MySqlDataReader rdr = cmd.ExecuteReader();
+				while (rdr.Read()) // 一行一行地读
+				{
+					handler.Send(Encoding.UTF8.GetBytes(
+						rdr[0] + " " + rdr[1] + " " + rdr[2] + " " + rdr[3] + " " + rdr[4] + "|"));
+				}
+				rdr.Close();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+				return -1;
+			}
+			return 0;
+		}
 	}
 }
