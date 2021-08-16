@@ -92,6 +92,7 @@ namespace car_rental_client
             this.parking_manage_button.TabIndex = 5;
             this.parking_manage_button.Text = "车位管理";
             this.parking_manage_button.UseVisualStyleBackColor = true;
+            this.parking_manage_button.Click += new System.EventHandler(this.parking_manage_button_Click);
             // 
             // go_back_button
             // 

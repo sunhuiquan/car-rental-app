@@ -60,6 +60,10 @@
    - **LIST_USER \r\n**
 1. 查询用户信息请求:
    - **GET_USER ACCOUNT \r\n**
+1. 踢出用户：
+   - **BAN_USER ACCOUNT \r\n**
+1. 删除车位信息：
+   - **BAN_PARKING ID \r\n**
 1. 各种各样的响应：**RESPONSE \r\n**
    - 登录响应:
      - LOGIN_SUCCESS(登录成功)
@@ -176,9 +180,9 @@
 - [x] 个人中心
 - [ ] 我的订单
 - [ ] 留言和留言管理
-- [ ] 车位管理
+- [x] 车位管理
 - [ ] 订单管理
-- [ ] 用户管理
+- [x] 用户管理
 - [ ] 公告
 - [ ] debug
 - [ ] 文档和ppt
