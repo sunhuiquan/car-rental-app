@@ -133,6 +133,28 @@ namespace car_rental_server
 								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						}
 					}
+					else if (request_array[0].Equals("CHARGE_MONEY"))
+					{
+						if (!is_login)
+						{
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+						else
+						{
+							if (CarRentalUser.charge_money(handler, request_array) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
+					else if (request_array[0].Equals("GET_USER"))
+					{
+						// GET_USER ACCOUNT \r\n
+						if (!is_login || num != 3)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else if (CarRentalUser.get_user_information(handler, request_array) != 0)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+					}
 					else if (request_array[0].Equals(""))
 					{
 						/* 
