@@ -54,6 +54,8 @@
    - **SEARCH LOCATION TIME_START DAYS PRICE \r\n**（没有就是NULL）
 1. 出租请求：
    - **RENTAL LOCATION TIME_START TIME_END PRICE \r\n**
+1. 订单请求:
+   - **ORDER ACCOUNT ID TIME_START DAYS**
 1. 充值请求：
    - **CHARGE_MONEY ACCOUNT VALUE \r\n**
 1. 列出用户信息请求：
@@ -77,6 +79,9 @@
    - 列出用户信息响应:
      - 首先是一直发回**对应的信息以|分隔不同消息**
      - 最后说明结束**LIST_USER_END \r\n**
+   - 订单响应:
+     - 日期错误**DATE_WRONG**
+     - 余额不足**MONEY_WRONG**
    - 查询用户信息响应:
      - 成功**USER_INFORMATION ACCOUNT USERNAME SCORE MONEY \r\n**
    - 通用响应:

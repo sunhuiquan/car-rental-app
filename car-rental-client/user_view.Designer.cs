@@ -58,14 +58,16 @@ namespace car_rental_client
             this.order_button = new System.Windows.Forms.Button();
             this.release_parking_button = new System.Windows.Forms.Button();
             this.buy_button = new System.Windows.Forms.Button();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.text1 = new System.Windows.Forms.TextBox();
+            this.text3 = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.message_button = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.money_label = new System.Windows.Forms.Label();
             this.charge_button = new System.Windows.Forms.Button();
+            this.text2 = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // list_parking_information_button
@@ -174,7 +176,7 @@ namespace car_rental_client
             this.informatino_listview.HideSelection = false;
             this.informatino_listview.Location = new System.Drawing.Point(12, 217);
             this.informatino_listview.Name = "informatino_listview";
-            this.informatino_listview.Size = new System.Drawing.Size(540, 372);
+            this.informatino_listview.Size = new System.Drawing.Size(598, 372);
             this.informatino_listview.TabIndex = 11;
             this.informatino_listview.UseCompatibleStateImageBehavior = false;
             this.informatino_listview.View = System.Windows.Forms.View.Details;
@@ -187,7 +189,7 @@ namespace car_rental_client
             // location
             // 
             this.location.Text = "位置";
-            this.location.Width = 146;
+            this.location.Width = 156;
             // 
             // price
             // 
@@ -197,12 +199,12 @@ namespace car_rental_client
             // time_start
             // 
             this.time_start.Text = "开始时间";
-            this.time_start.Width = 73;
+            this.time_start.Width = 97;
             // 
             // time_end
             // 
-            this.time_end.Text = "结束时间";
-            this.time_end.Width = 82;
+            this.time_end.Text = "结束(包含该天)";
+            this.time_end.Width = 106;
             // 
             // cost
             // 
@@ -299,26 +301,27 @@ namespace car_rental_client
             // 
             // buy_button
             // 
-            this.buy_button.Location = new System.Drawing.Point(225, 619);
+            this.buy_button.Location = new System.Drawing.Point(331, 617);
             this.buy_button.Name = "buy_button";
             this.buy_button.Size = new System.Drawing.Size(75, 23);
             this.buy_button.TabIndex = 23;
             this.buy_button.Text = "预约订单";
             this.buy_button.UseVisualStyleBackColor = true;
+            this.buy_button.Click += new System.EventHandler(this.buy_button_Click);
             // 
-            // textBox5
+            // text1
             // 
-            this.textBox5.Location = new System.Drawing.Point(13, 619);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(100, 21);
-            this.textBox5.TabIndex = 24;
+            this.text1.Location = new System.Drawing.Point(13, 619);
+            this.text1.Name = "text1";
+            this.text1.Size = new System.Drawing.Size(100, 21);
+            this.text1.TabIndex = 24;
             // 
-            // textBox6
+            // text3
             // 
-            this.textBox6.Location = new System.Drawing.Point(119, 619);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(100, 21);
-            this.textBox6.TabIndex = 25;
+            this.text3.Location = new System.Drawing.Point(225, 619);
+            this.text3.Name = "text3";
+            this.text3.Size = new System.Drawing.Size(100, 21);
+            this.text3.TabIndex = 25;
             // 
             // label9
             // 
@@ -328,15 +331,6 @@ namespace car_rental_client
             this.label9.Size = new System.Drawing.Size(29, 12);
             this.label9.TabIndex = 26;
             this.label9.Text = "id:";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(119, 603);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(59, 12);
-            this.label10.TabIndex = 27;
-            this.label10.Text = "租用天数:";
             // 
             // message_button
             // 
@@ -374,19 +368,46 @@ namespace car_rental_client
             this.charge_button.UseVisualStyleBackColor = true;
             this.charge_button.Click += new System.EventHandler(this.charge_button_Click);
             // 
+            // text2
+            // 
+            this.text2.Location = new System.Drawing.Point(119, 619);
+            this.text2.Name = "text2";
+            this.text2.Size = new System.Drawing.Size(100, 21);
+            this.text2.TabIndex = 32;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(117, 604);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(125, 12);
+            this.label10.TabIndex = 33;
+            this.label10.Text = "租借日期(YYYY-MM-DD)";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(244, 604);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(29, 12);
+            this.label12.TabIndex = 34;
+            this.label12.Text = "天数";
+            // 
             // user_view
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(564, 659);
+            this.ClientSize = new System.Drawing.Size(615, 659);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.text2);
             this.Controls.Add(this.charge_button);
             this.Controls.Add(this.money_label);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.message_button);
-            this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
+            this.Controls.Add(this.text3);
+            this.Controls.Add(this.text1);
             this.Controls.Add(this.buy_button);
             this.Controls.Add(this.release_parking_button);
             this.Controls.Add(this.order_button);
@@ -449,13 +470,15 @@ namespace car_rental_client
         private System.Windows.Forms.Button order_button;
         private System.Windows.Forms.Button release_parking_button;
         private System.Windows.Forms.Button buy_button;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox text1;
+        private System.Windows.Forms.TextBox text3;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button message_button;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label money_label;
         private System.Windows.Forms.Button charge_button;
+        private System.Windows.Forms.TextBox text2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label12;
     }
 }
