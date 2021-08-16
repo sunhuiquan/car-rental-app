@@ -172,7 +172,7 @@ namespace car_rental_client
             this.time_end,
             this.cost});
             this.informatino_listview.HideSelection = false;
-            this.informatino_listview.Location = new System.Drawing.Point(13, 217);
+            this.informatino_listview.Location = new System.Drawing.Point(12, 217);
             this.informatino_listview.Name = "informatino_listview";
             this.informatino_listview.Size = new System.Drawing.Size(540, 372);
             this.informatino_listview.TabIndex = 11;

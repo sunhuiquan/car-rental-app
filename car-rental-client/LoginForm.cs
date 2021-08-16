@@ -109,7 +109,9 @@ namespace car_rental_client
                 {
                     MessageBox.Show("登录成功");
 
-                    // to do 进入下一个界面
+                    this.Hide();
+                    admin_view avf = new admin_view();
+                    avf.Show();
                 }
                 else
                 {

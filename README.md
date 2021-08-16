@@ -48,7 +48,7 @@
 1. 注册请求：
    - **REGISTER ACCOUNT PASSWORD USERNAME PHONE \r\n**
    - **二进制图像信息 \r\n**
-1. 浏览车位信息请求：
+1. 列出车位信息请求：
    - **LIST \r\n**
 1. 搜索请求：
    - **SEARCH LOCATION TIME_START DAYS PRICE \r\n**（没有就是NULL）
@@ -56,6 +56,8 @@
    - **RENTAL LOCATION TIME_START TIME_END PRICE \r\n**
 1. 充值请求：
    - **CHARGE_MONEY ACCOUNT VALUE \r\n**
+1. 列出用户信息请求：
+   - **LIST_USER \r\n**
 1. 查询用户信息请求:
    - **GET_USER ACCOUNT \r\n**
 1. 各种各样的响应：**RESPONSE \r\n**
@@ -65,9 +67,12 @@
      - PASSWORD_WRONG(登录失败密码错误)
    - 注册响应:
      - REGISTER_SUCCESS(注册请求发送成功(待审批))
-   - 浏览车位信息响应:
+   - 列出车位信息响应:
      - 首先是一直发回**对应的信息以|分隔不同消息**
      - 最后说明结束**LIST_END \r\n**
+   - 列出用户信息响应:
+     - 首先是一直发回**对应的信息以|分隔不同消息**
+     - 最后说明结束**LIST_USER_END \r\n**
    - 查询用户信息响应:
      - 成功**USER_INFORMATION ACCOUNT USERNAME SCORE MONEY \r\n**
    - 通用响应:

@@ -83,6 +83,12 @@
     <Compile Include="src\CarRentalRegister.cs" />
     <Compile Include="src\CarRentalSearch.cs" />
     <Compile Include="src\CarRentalUser.cs" />
+    <Compile Include="user_manage_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="user_manage_form.Designer.cs">
+      <DependentUpon>user_manage_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="user_view.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="rental_form.resx">
       <DependentUpon>rental_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="user_manage_form.resx">
+      <DependentUpon>user_manage_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="user_view.resx">
       <DependentUpon>user_view.cs</DependentUpon>

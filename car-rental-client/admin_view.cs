@@ -12,15 +12,25 @@ namespace car_rental_client
 {
     public partial class admin_view : Form
     {
+        public static admin_view avf = null;
+
         public admin_view()
         {
             InitializeComponent();
+            avf = this;
         }
 
         private void go_back_button_Click(object sender, EventArgs e)
         {
             this.Close();
             LoginForm.login_form.Show();
+        }
+
+        private void user_manage_button_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            user_manage_form umf = new user_manage_form();
+            umf.Show();
         }
     }
 }
