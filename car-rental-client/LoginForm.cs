@@ -71,6 +71,7 @@ namespace car_rental_client
                     MessageBox.Show("登录成功");
 
                     this.Hide();
+                    user_view.account = account_text.Text;
                     user_view uv = new user_view();
                     uv.Show();
                 }

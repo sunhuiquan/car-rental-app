@@ -55,7 +55,9 @@
 1. 出租请求：
    - **RENTAL LOCATION TIME_START TIME_END PRICE \r\n**
 1. 充值请求：
-   - **CHARGE_MONEY VALUE \r\n**
+   - **CHARGE_MONEY ACCOUNT VALUE \r\n**
+1. 查询用户信息请求:
+   - **GET_USER ACCOUNT \r\n**
 1. 各种各样的响应：**RESPONSE \r\n**
    - 登录响应:
      - LOGIN_SUCCESS(登录成功)
@@ -66,6 +68,8 @@
    - 浏览车位信息响应:
      - 首先是一直发回**对应的信息以|分隔不同消息**
      - 最后说明结束**LIST_END \r\n**
+   - 查询用户信息响应:
+     - 成功**USER_INFORMATION ACCOUNT USERNAME SCORE MONEY \r\n**
    - 通用响应:
      - **SUCCESS \r\n**
      - **OTHER_WRONG \r\n**(其他错误如网络或服务器的错误)

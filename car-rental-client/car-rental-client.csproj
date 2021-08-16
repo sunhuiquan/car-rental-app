@@ -82,6 +82,7 @@
     <Compile Include="src\CarRentalLogin.cs" />
     <Compile Include="src\CarRentalRegister.cs" />
     <Compile Include="src\CarRentalSearch.cs" />
+    <Compile Include="src\CarRentalUser.cs" />
     <Compile Include="user_view.cs">
       <SubType>Form</SubType>
     </Compile>

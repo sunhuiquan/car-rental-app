@@ -13,6 +13,7 @@ namespace car_rental_client
     public partial class user_view : Form
     {
         public static user_view uv_form = null;
+        public static string account = null;
         public user_view()
         {
             InitializeComponent();
@@ -89,6 +90,51 @@ namespace car_rental_client
             this.Hide();
             chage_form cf = new chage_form();
             cf.Show();
+        }
+
+        private void reflush_button_Click(object sender, EventArgs e)
+        {
+            if (user_view.account == null)
+            {
+                MessageBox.Show("错误account为null");
+                return;
+            }
+            string[] user_information = CarRentalUser.get_user_information(user_view.account);
+            if (user_information == null || user_information.Length != 6)
+            {
+                MessageBox.Show("无此账号，请确认输入的是正确的account");
+            }
+            else
+            {
+                // USER_INFORMATION ACCOUNT USERNAME SCORE MONEY \r\n
+                MessageBox.Show("刷新成功");
+                account_label.Text = user_information[1];
+                username_label.Text = user_information[2];
+                score_label.Text = user_information[3];
+                money_label.Text = user_information[4];
+            }
+        }
+
+        private void user_view_Load(object sender, EventArgs e)
+        {
+            if (user_view.account == null || account.Length == 0)
+            {
+                MessageBox.Show("错误account为空");
+                return;
+            }
+            string[] user_information = CarRentalUser.get_user_information(user_view.account);
+            if (user_information == null || user_information.Length != 6)
+            {
+                MessageBox.Show("无此账号，请确认输入的是正确的account");
+            }
+            else
+            {
+                // USER_INFORMATION ACCOUNT USERNAME SCORE MONEY \r\n
+                account_label.Text = user_information[1];
+                username_label.Text = user_information[2];
+                score_label.Text = user_information[3];
+                money_label.Text = user_information[4];
+            }
         }
     }
 }

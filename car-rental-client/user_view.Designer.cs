@@ -64,10 +64,8 @@ namespace car_rental_client
             this.label10 = new System.Windows.Forms.Label();
             this.message_button = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
-            this.money = new System.Windows.Forms.Label();
+            this.money_label = new System.Windows.Forms.Label();
             this.charge_button = new System.Windows.Forms.Button();
-            this.label12 = new System.Windows.Forms.Label();
-            this.position_label = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // list_parking_information_button
@@ -82,7 +80,7 @@ namespace car_rental_client
             // 
             // go_back_button
             // 
-            this.go_back_button.Location = new System.Drawing.Point(291, 158);
+            this.go_back_button.Location = new System.Drawing.Point(295, 152);
             this.go_back_button.Name = "go_back_button";
             this.go_back_button.Size = new System.Drawing.Size(121, 23);
             this.go_back_button.TabIndex = 1;
@@ -212,12 +210,13 @@ namespace car_rental_client
             // 
             // reflush_button
             // 
-            this.reflush_button.Location = new System.Drawing.Point(198, 129);
+            this.reflush_button.Location = new System.Drawing.Point(202, 123);
             this.reflush_button.Name = "reflush_button";
             this.reflush_button.Size = new System.Drawing.Size(75, 23);
             this.reflush_button.TabIndex = 12;
             this.reflush_button.Text = "刷新信息";
             this.reflush_button.UseVisualStyleBackColor = true;
+            this.reflush_button.Click += new System.EventHandler(this.reflush_button_Click);
             // 
             // label5
             // 
@@ -341,7 +340,7 @@ namespace car_rental_client
             // 
             // message_button
             // 
-            this.message_button.Location = new System.Drawing.Point(291, 129);
+            this.message_button.Location = new System.Drawing.Point(295, 123);
             this.message_button.Name = "message_button";
             this.message_button.Size = new System.Drawing.Size(117, 23);
             this.message_button.TabIndex = 28;
@@ -357,17 +356,17 @@ namespace car_rental_client
             this.label11.TabIndex = 29;
             this.label11.Text = "金额：";
             // 
-            // money
+            // money_label
             // 
-            this.money.AutoSize = true;
-            this.money.Location = new System.Drawing.Point(273, 91);
-            this.money.Name = "money";
-            this.money.Size = new System.Drawing.Size(0, 12);
-            this.money.TabIndex = 30;
+            this.money_label.AutoSize = true;
+            this.money_label.Location = new System.Drawing.Point(273, 91);
+            this.money_label.Name = "money_label";
+            this.money_label.Size = new System.Drawing.Size(0, 12);
+            this.money_label.TabIndex = 30;
             // 
             // charge_button
             // 
-            this.charge_button.Location = new System.Drawing.Point(198, 159);
+            this.charge_button.Location = new System.Drawing.Point(202, 153);
             this.charge_button.Name = "charge_button";
             this.charge_button.Size = new System.Drawing.Size(75, 23);
             this.charge_button.TabIndex = 31;
@@ -375,32 +374,13 @@ namespace car_rental_client
             this.charge_button.UseVisualStyleBackColor = true;
             this.charge_button.Click += new System.EventHandler(this.charge_button_Click);
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(213, 114);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 12);
-            this.label12.TabIndex = 32;
-            this.label12.Text = "身份：";
-            // 
-            // position_label
-            // 
-            this.position_label.AutoSize = true;
-            this.position_label.Location = new System.Drawing.Point(275, 114);
-            this.position_label.Name = "position_label";
-            this.position_label.Size = new System.Drawing.Size(0, 12);
-            this.position_label.TabIndex = 33;
-            // 
             // user_view
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 659);
-            this.Controls.Add(this.position_label);
-            this.Controls.Add(this.label12);
             this.Controls.Add(this.charge_button);
-            this.Controls.Add(this.money);
+            this.Controls.Add(this.money_label);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.message_button);
             this.Controls.Add(this.label10);
@@ -432,6 +412,7 @@ namespace car_rental_client
             this.Controls.Add(this.list_parking_information_button);
             this.Name = "user_view";
             this.Text = "user_view";
+            this.Load += new System.EventHandler(this.user_view_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -474,9 +455,7 @@ namespace car_rental_client
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button message_button;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label money;
+        private System.Windows.Forms.Label money_label;
         private System.Windows.Forms.Button charge_button;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label position_label;
     }
 }

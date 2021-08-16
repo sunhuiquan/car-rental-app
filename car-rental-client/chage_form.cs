@@ -25,9 +25,9 @@ namespace car_rental_client
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text == null || textBox1.Text.Length == 0)
+            if (textBox1.Text == null || textBox1.Text.Length == 0 || user_view.account == null)
             {
-                MessageBox.Show("格式错误");
+                MessageBox.Show("格式或其他错误");
                 return;
             }
 
@@ -42,7 +42,7 @@ namespace car_rental_client
             }
 
             // CHARGE_MONEY VALUE \r\n
-            CarRentalClient.send("CHARGE_MONEY " + textBox1.Text + " \r\n");
+            CarRentalClient.send("CHARGE_MONEY " + user_view.account + " " + textBox1.Text + " \r\n");
             int i = 0;
             string rec = CarRentalClient.receive(ref i);
             if (rec.Split(' ')[0].Equals("SUCCESS"))
