@@ -70,6 +70,13 @@
    - **BAN_PARKING ID \r\n**
 1. 删除车位信息：
    - **BAN_ORDER ACCOUNT ID \r\n**
+1. 发布公告请求
+   - **ANNOUNCE \r\n**
+   - **(wait until accept a SUCCESS)**
+   - **传数据(textBox的行也是\r\n)**
+   - **ANNOUNCE_END \r\n**
+1. 获取公告请求：
+   - **GET_ANNOUNCE \r\n**
 1. 各种各样的响应：**RESPONSE \r\n**
    - 登录响应:
      - LOGIN_SUCCESS(登录成功)

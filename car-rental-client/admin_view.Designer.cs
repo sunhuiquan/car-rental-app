@@ -74,6 +74,7 @@ namespace car_rental_client
             this.announce_button.TabIndex = 3;
             this.announce_button.Text = "发布公告";
             this.announce_button.UseVisualStyleBackColor = true;
+            this.announce_button.Click += new System.EventHandler(this.announce_button_Click);
             // 
             // order_manage_button
             // 

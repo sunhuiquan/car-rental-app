@@ -10,7 +10,7 @@ namespace car_rental_client
     public class CarRentalClient
     {
         const bool is_debug = true;
-        static Socket client_socket = null;
+        public static Socket client_socket = null;
         public static int connect()
         {
             try

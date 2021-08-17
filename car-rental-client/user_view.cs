@@ -197,5 +197,17 @@ namespace car_rental_client
             list_order_form lof = new list_order_form();
             lof.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string str =  CarRentalMessage.get_announce();
+            if (str == null)
+                MessageBox.Show("获取失败");
+            else
+            {
+                textBox1.Text = str;
+                MessageBox.Show("获取成功");
+            }
+        }
     }
 }

@@ -46,5 +46,12 @@ namespace car_rental_client
             order_manage_form omf = new order_manage_form();
             omf.Show();
         }
+
+        private void announce_button_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            announcement_form af = new announcement_form();
+            af.Show();
+        }
     }
 }
