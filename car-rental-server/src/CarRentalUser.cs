@@ -86,6 +86,14 @@ namespace car_rental_server
 				string sql = "DELETE FROM user WHERE account='" + account + "';";
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				cmd.ExecuteNonQuery();
+
+				sql = "DELETE parking WHERE id in (SELECT id FROM order_form WHERE account='" + account + "');";
+				cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				cmd.ExecuteNonQuery();
+
+				sql = "DELETE FROM order_form WHERE user_account='" + account + "';";
+				cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				cmd.ExecuteNonQuery();
 			}
 			catch (Exception ex)
 			{
@@ -101,6 +109,10 @@ namespace car_rental_server
 			{
 				string sql = "DELETE FROM parking WHERE id='" + id + "';";
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				cmd.ExecuteNonQuery();
+
+				sql = "DELETE FROM order_form WHERE parking_id='" + id + "';";
+				cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				cmd.ExecuteNonQuery();
 			}
 			catch (Exception ex)

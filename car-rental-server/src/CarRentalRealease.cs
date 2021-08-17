@@ -32,8 +32,8 @@ namespace car_rental_server
 					rdr.Close();
 				}
 
-				string sql = "INSERT INTO parking(location, free_time, free_time_end, price, id) VALUES('"
-						  + args[1] + "','" + args[2] + "','" + args[3] + "'," + args[4] + ",'" + id.ToString() + "');";
+				string sql = "INSERT INTO parking(location, free_time, free_time_end, price, id,has_ordered) VALUES('"
+						  + args[1] + "','" + args[2] + "','" + args[3] + "'," + args[4] + ",'" + id.ToString() + "',0);";
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				cmd.ExecuteNonQuery();
 			}
