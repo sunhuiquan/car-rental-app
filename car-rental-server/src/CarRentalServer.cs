@@ -152,6 +152,18 @@ namespace car_rental_server
 								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						}
 					}
+					else if (request_array[0].Equals("LIST_ORDER"))
+					{
+						if (num != 2)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							if (CarRentalUser.list_all_order_information(handler) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("LIST_ORDER_END \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
 					else if (request_array[0].Equals("BAN_USER"))
 					{
 						// BAN_USER ACCOUNT \r\n
@@ -178,6 +190,19 @@ namespace car_rental_server
 								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						}
 					}
+					else if (request_array[0].Equals("BAN_ORDER"))
+					{
+						// BAN_ORDER ACCOUNT ID \r\n
+						if (num != 4)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							if (CarRentalUser.ban_order(handler, request_array[1], request_array[2]) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
 					else if (request_array[0].Equals("ORDER"))
 					{
 						// ORDER ACCOUNT ID TIME_START DAYS \r\n
@@ -196,7 +221,6 @@ namespace car_rental_server
 								handler.Send(Encoding.UTF8.GetBytes("HAS_ORDERED_WRONG \r\n"));
 							else
 								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
-
 						}
 					}
 					// else if (request_array[0].Equals(""))
