@@ -33,12 +33,15 @@ namespace car_rental_client
                 for (int i = 0; i < parking_information_array.Length & parking_information_array[i] != null; ++i)
                 {
                     string[] str_array = parking_information_array[i].Split(' ');
-                    ListViewItem item = new ListViewItem(str_array[6]);
-                    item.SubItems.Add(str_array[0]);
-                    item.SubItems.Add(str_array[1]);
-                    item.SubItems.Add(str_array[2]);
-                    item.SubItems.Add(str_array[4]);
-                    informatino_listview.Items.Add(item);
+                    if (int.Parse(str_array[7]) == 0)
+                    {
+                        ListViewItem item = new ListViewItem(str_array[6]);
+                        item.SubItems.Add(str_array[0]);
+                        item.SubItems.Add(str_array[1]);
+                        item.SubItems.Add(str_array[2]);
+                        item.SubItems.Add(str_array[4]);
+                        informatino_listview.Items.Add(item);
+                    }
                 }
             }
         }
@@ -68,12 +71,15 @@ namespace car_rental_client
                 for (int i = 0; i < parking_information_array.Length & parking_information_array[i] != null; ++i)
                 {
                     string[] str_array = parking_information_array[i].Split(' ');
-                    ListViewItem item = new ListViewItem(str_array[6]);
-                    item.SubItems.Add(str_array[0]);
-                    item.SubItems.Add(str_array[1]);
-                    item.SubItems.Add(str_array[2]);
-                    item.SubItems.Add(str_array[4]);
-                    informatino_listview.Items.Add(item);
+                    if (int.Parse(str_array[7]) == 0)
+                    {
+                        ListViewItem item = new ListViewItem(str_array[6]);
+                        item.SubItems.Add(str_array[0]);
+                        item.SubItems.Add(str_array[1]);
+                        item.SubItems.Add(str_array[2]);
+                        item.SubItems.Add(str_array[4]);
+                        informatino_listview.Items.Add(item);
+                    }
                 }
             }
         }
@@ -155,10 +161,12 @@ namespace car_rental_client
             string rec = CarRentalClient.receive(ref i);
             if (rec.Split(' ')[0].Equals("SUCCESS"))
                 MessageBox.Show("成功");
-            else if (rec.Split(' ')[0].Equals("DATE_WRONG"))
-                MessageBox.Show("日期错误");
+            else if (rec.Split(' ')[0].Equals("ID_OR_DATE_WRONG"))
+                MessageBox.Show("无此id的车或者无法满足日期要求错误");
             else if (rec.Split(' ')[0].Equals("MONEY_WRONG"))
                 MessageBox.Show("余额不足");
+            else if(rec.Split(' ')[0].Equals("HAS_ORDERED_WRONG"))
+                MessageBox.Show("该车位已经被订购");
             else
                 MessageBox.Show("其他错误");
 

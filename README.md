@@ -55,7 +55,7 @@
 1. 出租请求：
    - **RENTAL LOCATION TIME_START TIME_END PRICE \r\n**
 1. 订单请求:
-   - **ORDER ACCOUNT ID TIME_START DAYS**
+   - **ORDER ACCOUNT ID TIME_START DAYS \r\n**
 1. 充值请求：
    - **CHARGE_MONEY ACCOUNT VALUE \r\n**
 1. 列出用户信息请求：
@@ -74,14 +74,15 @@
    - 注册响应:
      - REGISTER_SUCCESS(注册请求发送成功(待审批))
    - 列出车位信息响应:
-     - 首先是一直发回**对应的信息以|分隔不同消息**
+     - 首先是一直发回**对应的信息以|分隔不同消息** (这个用|分隔,而没有\r\n)
      - 最后说明结束**LIST_END \r\n**
    - 列出用户信息响应:
-     - 首先是一直发回**对应的信息以|分隔不同消息**
+     - 首先是一直发回**对应的信息以|分隔不同消息** (这个用|分隔,而没有\r\n)
      - 最后说明结束**LIST_USER_END \r\n**
    - 订单响应:
-     - 日期错误**DATE_WRONG**
-     - 余额不足**MONEY_WRONG**
+     - ID或日期错误**ID_OR_DATE_WRONG \r\n**
+     - 余额不足**MONEY_WRONG \r\n**
+     - 已经被订**HAS_ORDERED_WRONG \r\n**
    - 查询用户信息响应:
      - 成功**USER_INFORMATION ACCOUNT USERNAME SCORE MONEY \r\n**
    - 通用响应:

@@ -35,6 +35,10 @@ namespace car_rental_client
                     item.SubItems.Add(str_array[1]);
                     item.SubItems.Add(str_array[2]);
                     item.SubItems.Add(str_array[4]);
+                    if (int.Parse(str_array[7]) == 0)
+                        item.SubItems.Add("未租借");
+                    else
+                        item.SubItems.Add("已被租借");
                     informatino_listview.Items.Add(item);
                 }
             }

@@ -40,6 +40,7 @@ namespace car_rental_client
             this.button3 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // informatino_listview
@@ -49,11 +50,12 @@ namespace car_rental_client
             this.location,
             this.price,
             this.time_start,
-            this.time_end});
+            this.time_end,
+            this.columnHeader1});
             this.informatino_listview.HideSelection = false;
             this.informatino_listview.Location = new System.Drawing.Point(12, 12);
             this.informatino_listview.Name = "informatino_listview";
-            this.informatino_listview.Size = new System.Drawing.Size(498, 372);
+            this.informatino_listview.Size = new System.Drawing.Size(565, 372);
             this.informatino_listview.TabIndex = 12;
             this.informatino_listview.UseCompatibleStateImageBehavior = false;
             this.informatino_listview.View = System.Windows.Forms.View.Details;
@@ -81,7 +83,7 @@ namespace car_rental_client
             // time_end
             // 
             this.time_end.Text = "结束时间";
-            this.time_end.Width = 82;
+            this.time_end.Width = 70;
             // 
             // button1
             // 
@@ -125,15 +127,19 @@ namespace car_rental_client
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(280, 395);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(149, 12);
+            this.label1.Size = new System.Drawing.Size(137, 12);
             this.label1.TabIndex = 17;
-            this.label1.Text = "（请输入要删除的车位id）";
+            this.label1.Text = "输入id(会同时删除订单)";
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "租借情况";
             // 
             // parking_manage_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 429);
+            this.ClientSize = new System.Drawing.Size(589, 429);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button3);
@@ -160,5 +166,6 @@ namespace car_rental_client
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }
