@@ -42,12 +42,20 @@ namespace car_rental_client
         {
             try
             {
-                FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
-                Byte[] imgByte = new Byte[fs.Length];
-                fs.Read(imgByte, 0, imgByte.Length);
-                fs.Close();
-                client_socket.Send(imgByte);
-                client_socket.Send(Encoding.UTF8.GetBytes(" \r\n"));
+                FileStream fileStream = new FileStream(path, FileMode.Open, FileAccess.Read);
+                BinaryReader binaryReader = new BinaryReader(fileStream);
+                long length = fileStream.Length;
+                byte[] bytes = new byte[length];
+                binaryReader.Read(bytes, 0, bytes.Length);
+                binaryReader.Close();
+                client_socket.Send(Encoding.UTF8.GetBytes(length.ToString() + "\r\n"));
+
+                int is_closed = 0;
+                string res = CarRentalClient.receive(ref is_closed);
+                if (!res.Split(' ')[0].Equals("SUCCESS"))
+                    return -1;
+
+                client_socket.Send(bytes);
             }
             catch (Exception)
             {
