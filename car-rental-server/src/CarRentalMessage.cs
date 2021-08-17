@@ -193,6 +193,7 @@ namespace car_rental_server
 				data = "From " + account + " <" + System.DateTime.Now.ToString() + "> :\r\n" + data + "\r\n";
 				FileStream fs = new FileStream(admin_message_path, FileMode.Append);
 				StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.Default);
+				sw.Write(data);
 				sw.Flush();
 				sw.Close();
 				fs.Close();

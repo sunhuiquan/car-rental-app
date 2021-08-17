@@ -287,7 +287,7 @@ namespace car_rental_server
 					else if (request_array[0].Equals("GET_ADMIN_MESSAGE"))
 					{
 						// GET_ADMIN_MESSAGE \r\n
-						if (num != 3)
+						if (num != 2)
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						else
 						{
