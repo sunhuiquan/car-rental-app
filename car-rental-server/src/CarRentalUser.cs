@@ -79,6 +79,28 @@ namespace car_rental_server
 			return 0;
 		}
 
+		public static int list_all_order_information(Socket handler)
+		{
+			try
+			{
+				string sql = "SELECT user_account, parking_id, date_start, date_end, cost FROM order_form";
+				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				MySqlDataReader rdr = cmd.ExecuteReader();
+				while (rdr.Read()) // 一行一行地读
+				{
+					handler.Send(Encoding.UTF8.GetBytes(
+						rdr[0] + " " + rdr[1] + " " + rdr[2] + " " + rdr[3] + " " + rdr[4] + "|"));
+				}
+				rdr.Close();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+				return -1;
+			}
+			return 0;
+		}
+
 		public static int ban_user(Socket handler, string account)
 		{
 			try
@@ -87,7 +109,8 @@ namespace car_rental_server
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				cmd.ExecuteNonQuery();
 
-				sql = "DELETE parking WHERE id in (SELECT id FROM order_form WHERE account='" + account + "');";
+				sql = "UPDATE parking SET has_ordered=0 WHERE id in (SELECT id FROM order_form WHERE account='"
+						+ account + "');";
 				cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				cmd.ExecuteNonQuery();
 
@@ -107,11 +130,76 @@ namespace car_rental_server
 		{
 			try
 			{
-				string sql = "DELETE FROM parking WHERE id='" + id + "';";
+				bool has_ordered = false;
+				string sql = "SELECT has_ordered FROM parking WHERE id='" + id + "';";
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				MySqlDataReader rdr = cmd.ExecuteReader();
+				while (rdr.Read())
+				{
+					if (int.Parse(rdr[0].ToString()) != 0)
+						has_ordered = true;
+				}
+				rdr.Close();
+
+				int cost = 0;
+				string account = null;
+				if (has_ordered)
+				{
+					sql = "SELECT user_account,cost FROM order_form WHERE parking_id='" + id + "';";
+					cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+					rdr = cmd.ExecuteReader();
+					if (rdr.Read())
+					{
+						account = rdr[0].ToString();
+						cost = int.Parse(rdr[1].ToString());
+					}
+					rdr.Close();
+
+					sql = "DELETE FROM order_form WHERE parking_id='" + id + "';";
+					cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+					cmd.ExecuteNonQuery();
+				}
+
+				sql = "DELETE FROM parking WHERE id='" + id + "';";
+				cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				cmd.ExecuteNonQuery();
 
-				sql = "DELETE FROM order_form WHERE parking_id='" + id + "';";
+				if (has_ordered)
+				{
+					sql = "UPDATE user SET money=money+" + cost.ToString() + " WHERE account='" + account + "';";
+					cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+					cmd.ExecuteNonQuery();
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+				return -1;
+			}
+			return 0;
+		}
+
+		public static int ban_order(Socket handler, string account, string id)
+		{
+			try
+			{
+				int cost = 0;
+				string sql = "SELECT cost FROM order_form WHERE user_account='" + account + "' and parking_id='" + id + "';";
+				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				MySqlDataReader rdr = cmd.ExecuteReader();
+				if (rdr.Read()) // 一行一行地读
+					cost = int.Parse(rdr[0].ToString());
+				rdr.Close();
+
+				sql = "DELETE FROM order_form WHERE user_account='" + account + "' and parking_id='" + id + "';";
+				cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				cmd.ExecuteNonQuery();
+
+				sql = "UPDATE parking SET has_ordered=0 WHERE id='" + id + "';";
+				cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				cmd.ExecuteNonQuery();
+
+				sql = "UPDATE user SET money=money+" + cost.ToString() + " WHERE account='" + account + "';";
 				cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				cmd.ExecuteNonQuery();
 			}
