@@ -284,7 +284,7 @@ namespace car_rental_client
             // 
             // order_button
             // 
-            this.order_button.Location = new System.Drawing.Point(234, 188);
+            this.order_button.Location = new System.Drawing.Point(225, 188);
             this.order_button.Name = "order_button";
             this.order_button.Size = new System.Drawing.Size(88, 23);
             this.order_button.TabIndex = 21;
@@ -343,6 +343,7 @@ namespace car_rental_client
             this.message_button.TabIndex = 28;
             this.message_button.Text = "留言(进入新窗口)";
             this.message_button.UseVisualStyleBackColor = true;
+            this.message_button.Click += new System.EventHandler(this.message_button_Click);
             // 
             // label11
             // 

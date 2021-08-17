@@ -209,5 +209,12 @@ namespace car_rental_client
                 MessageBox.Show("获取成功");
             }
         }
+
+        private void message_button_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            user_message_form umf = new user_message_form();
+            umf.Show();
+        }
     }
 }

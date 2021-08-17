@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace car_rental_client
 {
-    public partial class announcement_form : Form
+    public partial class admin_message_form : Form
     {
-        public announcement_form()
+        public admin_message_form()
         {
             InitializeComponent();
         }
@@ -25,11 +25,17 @@ namespace car_rental_client
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (CarRentalMessage.announce(textBox1.Text) != 0)
-                MessageBox.Show("发出错误");
+            if (textBox3.Text == null || textBox3.Text.Length == 0 ||
+                textBox2.Text == null || textBox2.Text.Length == 0)
+            {
+                MessageBox.Show("请输入足够信息");
+                return;
+            }
+
+            if (CarRentalMessage.put_message_to_user(textBox3.Text, textBox2.Text) == 0)
+                MessageBox.Show("留言成功");
             else
-                MessageBox.Show("成功");
-            textBox1.Clear();
+                MessageBox.Show("留言失败");
         }
     }
 }

@@ -65,6 +65,7 @@ namespace car_rental_client
             this.message_manage_button.TabIndex = 2;
             this.message_manage_button.Text = "留言管理";
             this.message_manage_button.UseVisualStyleBackColor = true;
+            this.message_manage_button.Click += new System.EventHandler(this.message_manage_button_Click);
             // 
             // announce_button
             // 

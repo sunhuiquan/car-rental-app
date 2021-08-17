@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin_message_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="admin_message_form.Designer.cs">
+      <DependentUpon>admin_message_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="admin_view.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,6 +120,12 @@
     <Compile Include="user_manage_form.Designer.cs">
       <DependentUpon>user_manage_form.cs</DependentUpon>
     </Compile>
+    <Compile Include="user_message_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="user_message_form.Designer.cs">
+      <DependentUpon>user_message_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="user_view.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +138,9 @@
     <Compile Include="VistorForm.Designer.cs">
       <DependentUpon>VistorForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="admin_message_form.resx">
+      <DependentUpon>admin_message_form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="admin_view.resx">
       <DependentUpon>admin_view.cs</DependentUpon>
     </EmbeddedResource>
@@ -164,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="user_manage_form.resx">
       <DependentUpon>user_manage_form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="user_message_form.resx">
+      <DependentUpon>user_message_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="user_view.resx">
       <DependentUpon>user_view.cs</DependentUpon>

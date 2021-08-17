@@ -53,5 +53,12 @@ namespace car_rental_client
             announcement_form af = new announcement_form();
             af.Show();
         }
+
+        private void message_manage_button_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            admin_message_form amf = new admin_message_form();
+            amf.Show();
+        }
     }
 }
