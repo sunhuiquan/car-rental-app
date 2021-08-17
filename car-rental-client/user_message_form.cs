@@ -34,5 +34,19 @@ namespace car_rental_client
                 textBox1.Text = message;
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (textBox2.Text == null || textBox2.Text.Length == 0)
+            {
+                MessageBox.Show("请输入足够信息");
+                return;
+            }
+
+            if (CarRentalMessage.put_message_to_admin(user_view.account,textBox2.Text) == 0)
+                MessageBox.Show("留言成功");
+            else
+                MessageBox.Show("留言失败");
+        }
     }
 }

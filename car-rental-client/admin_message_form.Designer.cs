@@ -56,6 +56,7 @@ namespace car_rental_client
             this.button3.TabIndex = 44;
             this.button3.Text = "查看留言";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 

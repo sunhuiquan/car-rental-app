@@ -37,5 +37,17 @@ namespace car_rental_client
             else
                 MessageBox.Show("留言失败");
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string message = CarRentalMessage.get_admin_message();
+            if (message == null)
+                MessageBox.Show("查看失败");
+            else
+            {
+                MessageBox.Show("查看成功(空代表无留言)");
+                textBox1.Text = message;
+            }
+        }
     }
 }

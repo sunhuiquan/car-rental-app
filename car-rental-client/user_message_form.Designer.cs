@@ -72,6 +72,7 @@ namespace car_rental_client
             this.button2.TabIndex = 38;
             this.button2.Text = "留言给管理";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button3
             // 
