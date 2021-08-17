@@ -272,12 +272,31 @@ namespace car_rental_server
 								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						}
 					}
-					// else if (request_array[0].Equals(""))
-					// {
-					// }
-					// else if (request_array[0].Equals(""))
-					// {
-					// }
+					else if (request_array[0].Equals("PUT_MESSAGE_TO_ADMIN"))
+					{
+						if (num != 3)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							if (CarRentalMessage.put_message_to_admin(handler, request_array[1]) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
+					else if (request_array[0].Equals("GET_ADMIN_MESSAGE"))
+					{
+						// GET_ADMIN_MESSAGE \r\n
+						if (num != 3)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							if (CarRentalMessage.get_admin_message(handler) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
 					// else if (request_array[0].Equals(""))
 					// {
 					// }
