@@ -190,5 +190,12 @@ namespace car_rental_client
                 money_label.Text = user_information[4];
             }
         }
+
+        private void order_button_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            list_order_form lof = new list_order_form();
+            lof.Show();
+        }
     }
 }

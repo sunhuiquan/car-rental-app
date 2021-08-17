@@ -288,6 +288,7 @@ namespace car_rental_client
             this.order_button.TabIndex = 21;
             this.order_button.Text = "查询用户订单";
             this.order_button.UseVisualStyleBackColor = true;
+            this.order_button.Click += new System.EventHandler(this.order_button_Click);
             // 
             // release_parking_button
             // 
