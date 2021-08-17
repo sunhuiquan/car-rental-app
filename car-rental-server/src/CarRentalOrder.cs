@@ -69,6 +69,11 @@ namespace car_rental_server
 				sql = "UPDATE user SET money=money-" + cost.ToString() + " WHERE account='" + args[1] + "';";
 				cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				cmd.ExecuteNonQuery();
+
+				sql = "UPDATE user SET score=score+" + cost.ToString() + " WHERE account='" + args[1] + "';";
+				// 花钱加积分
+				cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				cmd.ExecuteNonQuery();
 			}
 			catch (Exception ex)
 			{

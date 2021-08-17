@@ -247,8 +247,46 @@ namespace car_rental_server
 								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						}
 					}
+					else if (request_array[0].Equals("GET_USER_MESSAGE"))
+					{
+						// GET_USER_MESSAGE ACCOUNT \r\n
+						if (num != 3)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							if (CarRentalMessage.get_user_message(handler, request_array[1]) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
+					else if (request_array[0].Equals("PUT_MESSAGE_TO_USER"))
+					{
+						if (num != 3)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							if (CarRentalMessage.put_message_to_user(handler, request_array[1]) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
 					// else if (request_array[0].Equals(""))
-					// {}
+					// {
+					// }
+					// else if (request_array[0].Equals(""))
+					// {
+					// }
+					// else if (request_array[0].Equals(""))
+					// {
+					// }
+					// else if (request_array[0].Equals(""))
+					// {
+					// }
+					// else if (request_array[0].Equals(""))
+					// {
+					// }
 					// else if (request_array[0].Equals(""))
 					// {
 					// 	/* 

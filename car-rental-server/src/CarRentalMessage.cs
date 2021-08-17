@@ -19,7 +19,7 @@ namespace car_rental_server
 				if (!Directory.Exists("/tmp/CarRentalServer"))
 					Directory.CreateDirectory("/tmp/CarRentalServer");
 				if (!File.Exists(file_path))
-					File.Create(file_path);
+					File.Create(file_path).Close();
 
 				handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
 
@@ -76,5 +76,80 @@ namespace car_rental_server
 			}
 			return 0;
 		}
+
+		const string user_message_path = "/tmp/CarRentalServer/";
+
+		public static int get_user_message(Socket handler, string account)
+		{
+			try
+			{
+				string message_file = user_message_path + account + ".txt";
+				if (!Directory.Exists("/tmp/CarRentalServer"))
+					Directory.CreateDirectory("/tmp/CarRentalServer");
+				if (!File.Exists(message_file))
+					File.Create(message_file).Close();
+
+				string str = "";
+				using (StreamReader sr = new StreamReader(message_file))
+				{
+					string temp = null;
+					while ((temp = sr.ReadLine()) != null)
+						str += temp + "\r\n";
+				}
+				handler.Send(Encoding.UTF8.GetBytes(str));
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+				return -1;
+			}
+			return 0;
+		}
+
+		public static int put_message_to_user(Socket handler, string account)
+		{
+			// PUT_MESSAGE_TO_USER ACCOUNT \r\n
+			// (wait until accept a SUCCESS)
+			// 传数据(textBox的行也是\r\n)
+			// MESSAGE_END \r\n
+			try
+			{
+				string path = user_message_path + account + ".txt";
+
+				if (!Directory.Exists("/tmp/CarRentalServer"))
+					Directory.CreateDirectory("/tmp/CarRentalServer");
+				if (!File.Exists(path))
+					File.Create(path).Close();
+
+				handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+
+				byte[] bytes = new Byte[1024];
+				string data = null;
+				while (true)
+				{
+					int bytesRec = handler.Receive(bytes);
+					if (bytesRec == 0)
+						break;
+
+					data += Encoding.UTF8.GetString(bytes, 0, bytesRec);
+					if (data.IndexOf("MESSAGE_END \r\n") > -1)
+						break;
+				}
+				if (data == null)
+					return -1;
+
+				data = data.Substring(0, data.IndexOf("MESSAGE_END \r\n"));
+				using (StreamWriter sw = new StreamWriter(path))
+					sw.Write(data);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+				return -1;
+			}
+			return 0;
+		}
+
+		const string admin_message_path = "/tmp/CarRentalServer/admin.txt";
 	}
 }
