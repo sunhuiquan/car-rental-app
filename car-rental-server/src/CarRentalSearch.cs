@@ -11,13 +11,13 @@ namespace car_rental_server
 		{
 			try
 			{
-				string sql = "SELECT location,price,free_time,free_time_end,id FROM parking";
+				string sql = "SELECT location,price,free_time,free_time_end,id,has_ordered FROM parking";
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				MySqlDataReader rdr = cmd.ExecuteReader();
 				while (rdr.Read()) // 一行一行地读
 				{
 					handler.Send(Encoding.UTF8.GetBytes(
-						rdr[0] + " " + rdr[1] + " " + rdr[2] + " " + rdr[3] + " " + rdr[4] + "|"));
+						rdr[0] + " " + rdr[1] + " " + rdr[2] + " " + rdr[3] + " " + rdr[4] + " " + rdr[5] + "|"));
 				}
 				rdr.Close();
 			}
@@ -45,7 +45,7 @@ namespace car_rental_server
 				}
 				if (!args[2].Equals("NULL"))
 				{
-					temps[i++] = "free_time <= '" + args[2] + "' and free_time_end > '" + args[2] + "'";
+					temps[i++] = "free_time <= '" + args[2] + "' and free_time_end >= '" + args[2] + "'";
 				}
 				if (!args[3].Equals("NULL"))
 				{
@@ -67,18 +67,18 @@ namespace car_rental_server
 
 				if (where_str.Length == 0)
 				{
-					sql = "SELECT location,price,free_time,free_time_end,id FROM parking";
+					sql = "SELECT location,price,free_time,free_time_end,id,has_ordered FROM parking";
 				}
 				else
 				{
-					sql = "SELECT location,price,free_time,free_time_end,id FROM parking WHERE " + where_str;
+					sql = "SELECT location,price,free_time,free_time_end,id,has_ordered FROM parking WHERE " + where_str;
 				}
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				MySqlDataReader rdr = cmd.ExecuteReader();
 				while (rdr.Read()) // 一行一行地读
 				{
 					handler.Send(Encoding.UTF8.GetBytes(
-						rdr[0] + " " + rdr[1] + " " + rdr[2] + " " + rdr[3] + " " + rdr[4] + "|"));
+						rdr[0] + " " + rdr[1] + " " + rdr[2] + " " + rdr[3] + " " + rdr[4] + " " + rdr[5] + "|"));
 				}
 				rdr.Close();
 			}

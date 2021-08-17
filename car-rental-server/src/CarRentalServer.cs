@@ -57,7 +57,6 @@ namespace car_rental_server
 			Socket handler = (Socket)obj;
 			string[] request_array = null;
 
-			bool is_login = false; // 一些功能必须先登录才可以进行
 			while (true)
 			{
 				string request = receive_request(handler, ref is_closed);
@@ -75,19 +74,12 @@ namespace car_rental_server
 					// 功能解析
 					if (request_array[0].Equals("ACCOUNT"))
 					{
-						if (check_login_num(num, request_array) == 0 && !is_login)
-						{
-							if (CarRentalLogin.login(request_array, handler) == 0)
-								is_login = true; // 登陆成功
-						}
-						else
-						{
+						if (check_login_num(num, request_array) != 0 || CarRentalLogin.login(request_array, handler) != 0)
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
-						}
 					}
 					else if (request_array[0].Equals("REGISTER"))
 					{
-						if (is_login || num != 6)
+						if (num != 6)
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						else
 						{
@@ -111,7 +103,7 @@ namespace car_rental_server
 					}
 					else if (request_array[0].Equals("SEARCH"))
 					{
-						if (!is_login || num != 6)
+						if (num != 6)
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						else
 						{
@@ -123,7 +115,7 @@ namespace car_rental_server
 					}
 					else if (request_array[0].Equals("RENTAL"))
 					{
-						if (!is_login || num != 6)
+						if (num != 6)
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						else
 						{
@@ -135,29 +127,22 @@ namespace car_rental_server
 					}
 					else if (request_array[0].Equals("CHARGE_MONEY"))
 					{
-						if (!is_login)
-						{
-							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
-						}
+						if (CarRentalUser.charge_money(handler, request_array) == 0)
+							handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
 						else
-						{
-							if (CarRentalUser.charge_money(handler, request_array) == 0)
-								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
-							else
-								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
-						}
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 					}
 					else if (request_array[0].Equals("GET_USER"))
 					{
 						// GET_USER ACCOUNT \r\n
-						if (!is_login || num != 3)
+						if (num != 3)
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						else if (CarRentalUser.get_user_information(handler, request_array) != 0)
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 					}
 					else if (request_array[0].Equals("LIST_USER"))
 					{
-						if (!is_login || num != 2)
+						if (num != 2)
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						else
 						{
@@ -170,7 +155,7 @@ namespace car_rental_server
 					else if (request_array[0].Equals("BAN_USER"))
 					{
 						// BAN_USER ACCOUNT \r\n
-						if (!is_login || num != 3)
+						if (num != 3)
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						else
 						{
@@ -183,7 +168,7 @@ namespace car_rental_server
 					else if (request_array[0].Equals("BAN_PARKING"))
 					{
 						// BAN_PARKING ID \r\n
-						if (!is_login || num != 3)
+						if (num != 3)
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						else
 						{
@@ -193,8 +178,27 @@ namespace car_rental_server
 								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						}
 					}
-					// else if (request_array[0].Equals(""))
-					// {}
+					else if (request_array[0].Equals("ORDER"))
+					{
+						// ORDER ACCOUNT ID TIME_START DAYS \r\n
+						if (num != 6)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							order_type ret = CarRentalOrder.order(handler, request_array);
+							if (ret == order_type.SUCCESS)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else if (ret == order_type.ID_OR_DATE_WRONG)
+								handler.Send(Encoding.UTF8.GetBytes("ID_OR_DATE_WRONG \r\n"));
+							else if (ret == order_type.MONEY_WRONG)
+								handler.Send(Encoding.UTF8.GetBytes("MONEY_WRONG \r\n"));
+							else if (ret == order_type.HAS_ORDERED_WRONG)
+								handler.Send(Encoding.UTF8.GetBytes("HAS_ORDERED_WRONG \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+
+						}
+					}
 					// else if (request_array[0].Equals(""))
 					// {}
 					// else if (request_array[0].Equals(""))
