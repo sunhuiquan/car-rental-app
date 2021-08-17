@@ -16,34 +16,39 @@ namespace car_rental_server
 
 		public static int register(Socket handler, string[] args)
 		{
-			if (count < 0) // 溢出
-				return -1;
-			string pic_filepath = FILE_PATH + count.ToString() + ".png";
-
-			byte[] b = new byte[4096];
-			//如何确定该数组大小
-			MemoryStream fs = new MemoryStream();
-			int length = 0;
-			//每次只能读取小于等于缓冲区的大小
-			while ((length = handler.Receive(b)) > 0)
-			{
-				string request = Encoding.UTF8.GetString(b, 0, length);
-				if (request.IndexOf("\r\n") > -1)
-				{
-					fs.Write(b, 0, length - 5); // 少读" \r\n"这五个字节
-					break;
-				}
-				fs.Write(b, 0, length);
-			}
-			fs.Flush();
-			Bitmap Img = new Bitmap(fs);
-			Img.Save(pic_filepath, ImageFormat.Png);
-			fs.Close();
-
 			try
 			{
-				string sql = "INSERT INTO unsure_user(account, password, phone, pic_filepath, score, username) VALUES("
-				+ args[1] + "," + args[2] + "," + args[4] + "," + pic_filepath + ",0," + args[3] + ");";
+				if (count < 0) // 溢出
+					return -1;
+				string pic_filepath = FILE_PATH + count.ToString() + ".png";
+
+				if (!Directory.Exists("/tmp/server_pic"))
+					Directory.CreateDirectory("/tmp/server_pic");
+				if (!File.Exists(pic_filepath))
+					File.Create(pic_filepath).Close();
+
+				byte[] bytes = new Byte[1024];
+				string request = null;
+				while (true)
+				{
+					int bytesRec = handler.Receive(bytes);
+					request += Encoding.UTF8.GetString(bytes, 0, bytesRec);
+					if (request.IndexOf("\r\n") > -1)
+						break;
+				}
+				long length = long.Parse(request.Split(' ')[0]);
+				handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+
+				byte[] b = new byte[length + 100];
+				if (handler.Receive(b) != length)
+					return -1;
+
+				BinaryWriter bw = new BinaryWriter(new FileStream(pic_filepath, FileMode.Truncate));
+				bw.Write(b, 0, int.Parse(length.ToString()));
+				bw.Close();
+
+				string sql = "INSERT INTO unsure_user(account, password, phone, pic_filepath, score, username, money) VALUES('"
+				+ args[1] + "','" + args[2] + "','" + args[4] + "','" + pic_filepath + "',0,'" + args[3] + "',0);";
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				cmd.ExecuteNonQuery();
 			}
