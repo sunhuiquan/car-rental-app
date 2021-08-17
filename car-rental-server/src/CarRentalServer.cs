@@ -223,6 +223,30 @@ namespace car_rental_server
 								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						}
 					}
+					else if (request_array[0].Equals("ANNOUNCE"))
+					{
+						if (num != 2)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							if (CarRentalMessage.annouce(handler) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
+					else if (request_array[0].Equals("GET_ANNOUNCE"))
+					{
+						if (num != 2)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							if (CarRentalMessage.get_annouce(handler) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
 					// else if (request_array[0].Equals(""))
 					// {}
 					// else if (request_array[0].Equals(""))
@@ -248,6 +272,7 @@ namespace car_rental_server
 					else
 					{
 						handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						Console.WriteLine("aa");
 					}
 				}
 			}
