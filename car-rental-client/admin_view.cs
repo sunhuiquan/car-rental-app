@@ -39,5 +39,12 @@ namespace car_rental_client
             parking_manage_form pmf = new parking_manage_form();
             pmf.Show();
         }
+
+        private void order_manage_button_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            order_manage_form omf = new order_manage_form();
+            omf.Show();
+        }
     }
 }

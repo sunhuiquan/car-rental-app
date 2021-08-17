@@ -83,6 +83,7 @@ namespace car_rental_client
             this.order_manage_button.TabIndex = 4;
             this.order_manage_button.Text = "订单管理";
             this.order_manage_button.UseVisualStyleBackColor = true;
+            this.order_manage_button.Click += new System.EventHandler(this.order_manage_button_Click);
             // 
             // parking_manage_button
             // 

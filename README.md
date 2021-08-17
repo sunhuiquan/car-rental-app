@@ -60,12 +60,16 @@
    - **CHARGE_MONEY ACCOUNT VALUE \r\n**
 1. 列出用户信息请求：
    - **LIST_USER \r\n**
+1. 列出订单请求：
+   - **LIST_ORDER \r\n**
 1. 查询用户信息请求:
    - **GET_USER ACCOUNT \r\n**
 1. 踢出用户：
    - **BAN_USER ACCOUNT \r\n**
 1. 删除车位信息：
    - **BAN_PARKING ID \r\n**
+1. 删除车位信息：
+   - **BAN_ORDER ACCOUNT ID \r\n**
 1. 各种各样的响应：**RESPONSE \r\n**
    - 登录响应:
      - LOGIN_SUCCESS(登录成功)
@@ -79,6 +83,9 @@
    - 列出用户信息响应:
      - 首先是一直发回**对应的信息以|分隔不同消息** (这个用|分隔,而没有\r\n)
      - 最后说明结束**LIST_USER_END \r\n**
+   - 列出订单信息响应:
+     - 首先是一直发回**对应的信息以|分隔不同消息** (这个用|分隔,而没有\r\n)
+     - 最后说明结束**LIST_ORDER_END \r\n**
    - 订单响应:
      - ID或日期错误**ID_OR_DATE_WRONG \r\n**
      - 余额不足**MONEY_WRONG \r\n**
@@ -182,12 +189,12 @@
 - [x] 浏览车位功能
 - [x] 查询功能
 - [x] 发布功能
-- [ ] 预约功能
+- [x] 预约功能
 - [x] 个人中心
 - [ ] 我的订单
 - [ ] 留言和留言管理
 - [x] 车位管理
-- [ ] 订单管理
+- [x] 订单管理
 - [x] 用户管理
 - [ ] 公告
 - [ ] debug
