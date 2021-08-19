@@ -46,6 +46,7 @@ namespace car_rental_client
             this.register_control_button.TabIndex = 0;
             this.register_control_button.Text = "审批用户注册";
             this.register_control_button.UseVisualStyleBackColor = true;
+            this.register_control_button.Click += new System.EventHandler(this.register_control_button_Click);
             // 
             // user_manage_button
             // 

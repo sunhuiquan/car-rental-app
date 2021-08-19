@@ -60,5 +60,12 @@ namespace car_rental_client
             admin_message_form amf = new admin_message_form();
             amf.Show();
         }
+
+        private void register_control_button_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            register_manage_form rmf = new register_manage_form();
+            rmf.Show();
+        }
     }
 }

@@ -42,67 +42,81 @@
 由于这是一个非周知服务，没有对应端口，RFC 上没有对应的应用层协议，不过显然这个 app 也用不到什么多复杂的协议，简单几个指令传过去就好了。。
 
 1. **[ ]** 代表可选参数，不同字段以空格分隔，**\r\n** 作为分隔字节流的边界
+1. 通用响应: **没有明确表明响应的就是通过通用响应报文格式回应**
+     - **SUCCESS \r\n**
+     - **OTHER_WRONG \r\n**(其他错误如网络或服务器的错误)
 1. 登录请求：**ACCOUNT TYPE \[account\] \[password\] \r\n**
    - TYPE 是登录类型，指游客(VISITOR)、用户(USER)、管理员(ADMINISTRATOR)
    - account 和 password 是具体账号密码，可选项(非游客才需要)
-1. 注册请求：
-   - **REGISTER ACCOUNT PASSWORD USERNAME PHONE \r\n**
-   - **二进制图像信息 \r\n**
-1. 列出车位信息请求：
-   - **LIST \r\n**
-1. 搜索请求：
-   - **SEARCH LOCATION TIME_START DAYS PRICE \r\n**（没有就是NULL）
-1. 出租请求：
-   - **RENTAL LOCATION TIME_START TIME_END PRICE \r\n**
-1. 订单请求:
-   - **ORDER ACCOUNT ID TIME_START DAYS \r\n**
-1. 充值请求：
-   - **CHARGE_MONEY ACCOUNT VALUE \r\n**
-1. 列出用户信息请求：
-   - **LIST_USER \r\n**
-1. 列出订单请求：
-   - **LIST_ORDER \r\n**
-1. 查询用户信息请求:
-   - **GET_USER ACCOUNT \r\n**
-1. 踢出用户：
-   - **BAN_USER ACCOUNT \r\n**
-1. 删除车位信息：
-   - **BAN_PARKING ID \r\n**
-1. 删除车位信息：
-   - **BAN_ORDER ACCOUNT ID \r\n**
-1. 发布公告请求
-   - **ANNOUNCE \r\n**
-   - **(wait until accept a SUCCESS)**
-   - **传数据(textBox的行也是\r\n)**
-   - **ANNOUNCE_END \r\n**
-1. 获取公告请求：
-   - **GET_ANNOUNCE \r\n**
-1. 各种各样的响应：**RESPONSE \r\n**
    - 登录响应:
      - LOGIN_SUCCESS(登录成功)
      - ACCOUNT_NOT_FOUND(登陆失败无该账号)
      - PASSWORD_WRONG(登录失败密码错误)
+1. 注册请求：
+   - **REGISTER ACCOUNT PASSWORD USERNAME PHONE \r\n**
+   - **发送图片大小 \r\n**
+   - **等待服务器发回一个"SUCCESS \r\n"的响应(这一步并没有实际发送)**
+   - **发送图片二进制字节流 \r\n**
    - 注册响应:
      - REGISTER_SUCCESS(注册请求发送成功(待审批))
+1. 列出车位信息请求：
+   - **LIST \r\n**
    - 列出车位信息响应:
      - 首先是一直发回**对应的信息以|分隔不同消息** (这个用|分隔,而没有\r\n)
      - 最后说明结束**LIST_END \r\n**
-   - 列出用户信息响应:
-     - 首先是一直发回**对应的信息以|分隔不同消息** (这个用|分隔,而没有\r\n)
-     - 最后说明结束**LIST_USER_END \r\n**
-   - 列出订单信息响应:
-     - 首先是一直发回**对应的信息以|分隔不同消息** (这个用|分隔,而没有\r\n)
-     - 最后说明结束**LIST_ORDER_END \r\n**
+1. 搜索车位请求：
+   - **SEARCH LOCATION TIME_START DAYS PRICE \r\n**（没有就是NULL）
+1. 出租车位请求：
+   - **RENTAL LOCATION TIME_START TIME_END PRICE \r\n**
+1. 订车位请求:
+   - **ORDER ACCOUNT ID TIME_START DAYS \r\n**
    - 订单响应:
      - ID或日期错误**ID_OR_DATE_WRONG \r\n**
      - 余额不足**MONEY_WRONG \r\n**
      - 已经被订**HAS_ORDERED_WRONG \r\n**
+1. 充值请求：
+   - **CHARGE_MONEY ACCOUNT VALUE \r\n**
+1. 列出用户信息请求：
+   - **LIST_USER \r\n**
+   - 列出用户信息响应:
+     - 首先是一直发回**对应的信息以|分隔不同消息** (这个用|分隔,而没有\r\n)
+     - 最后说明结束**LIST_USER_END \r\n**
+1. 列出订单请求：
+   - **LIST_ORDER \r\n**
+   - 列出订单信息响应:
+     - 首先是一直发回**对应的信息以|分隔不同消息** (这个用|分隔,而没有\r\n)
+     - 最后说明结束**LIST_ORDER_END \r\n**
+1. 查询用户信息请求:
+   - **GET_USER ACCOUNT \r\n**
    - 查询用户信息响应:
      - 成功**USER_INFORMATION ACCOUNT USERNAME SCORE MONEY \r\n**
-   - 通用响应:
-     - **SUCCESS \r\n**
-     - **OTHER_WRONG \r\n**(其他错误如网络或服务器的错误)
-     <!-- to do to do to do to do to do to do -->
+1. 管理员踢出用户：
+   - **BAN_USER ACCOUNT \r\n**
+1. 管理员删除车位信息：
+   - **BAN_PARKING ID \r\n**
+1. 管理员删除车位信息：
+   - **BAN_ORDER ACCOUNT ID \r\n**
+1. 管理员发布公告请求
+   - **ANNOUNCE \r\n**
+   - **等待服务器发回一个"SUCCESS \r\n"的响应(这一步并没有实际发送)**
+   - **传数据(textBox的行也是\r\n)**
+   - **ANNOUNCE_END \r\n**
+1. 用户获取公告请求：
+   - **GET_ANNOUNCE \r\n**
+1. 用户获取留言请求：
+   - **GET_USER_MESSAGE ACCOUNT \r\n**
+1. 管理员留言给用户请求：
+   - **PUT_MESSAGE_TO_USER ACCOUNT \r\n**
+   - **等待服务器发回一个"SUCCESS \r\n"的响应(这一步并没有实际发送)**
+   - **传数据(textBox的行也是\r\n)**
+   - **MESSAGE_END \r\n**
+1. 用户留言给管理员请求：
+   - **PUT_MESSAGE_TO_ADMIN ACCOUNT \r\n**
+   - **等待服务器发回一个"SUCCESS \r\n"的响应(这一步并没有实际发送)**
+   - **传数据(textBox的行也是\r\n)**
+   - **MESSAGE_END \r\n**
+1. 管理员获取留言请求：
+   - **GET_ADMIN_MESSAGE \r\n**
 
 ---
 
