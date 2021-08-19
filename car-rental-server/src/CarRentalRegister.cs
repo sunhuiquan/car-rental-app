@@ -38,12 +38,13 @@ namespace car_rental_server
 				handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
 
 				byte[] b = new byte[length + 100];
-				if (handler.Receive(b) != length)
-					return -1;
-
-				// 截断模式+账号不可能重复保证正确性
-				BinaryWriter bw = new BinaryWriter(new FileStream(pic_filepath, FileMode.Truncate));
-				bw.Write(b, 0, int.Parse(length.ToString()));
+				BinaryWriter bw = new BinaryWriter(new FileStream(pic_filepath, FileMode.Append));
+				for (int l = 0; l < length;)
+				{
+					int len = handler.Receive(b);
+					bw.Write(b, 0, len);
+					l += len;
+				}
 				bw.Close();
 
 				string sql = "INSERT INTO unsure_user(account, password, phone, pic_filepath, score, username, money) VALUES('"
@@ -63,7 +64,7 @@ namespace car_rental_server
 		{
 			try
 			{
-				string sql = "SELECT account,username,phone,pic_pathname from unsure_user;";
+				string sql = "SELECT account,username,phone,pic_filepath from unsure_user;";
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				MySqlDataReader rdr = cmd.ExecuteReader();
 				bool has_next = false;
