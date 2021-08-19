@@ -49,6 +49,8 @@ namespace car_rental_client
             {
                 try
                 {
+                    CarRentalClient.send("SUCCESS \r\n");
+
                     if (!Directory.Exists("./pic"))
                         Directory.CreateDirectory("./pic");
                     if (!File.Exists(path))
