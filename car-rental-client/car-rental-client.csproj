@@ -102,6 +102,12 @@
     <Compile Include="RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="register_manage_form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="register_manage_form.Designer.cs">
+      <DependentUpon>register_manage_form.cs</DependentUpon>
+    </Compile>
     <Compile Include="rental_form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +179,9 @@
     </Compile>
     <EmbeddedResource Include="RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="register_manage_form.resx">
+      <DependentUpon>register_manage_form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="rental_form.resx">
       <DependentUpon>rental_form.cs</DependentUpon>

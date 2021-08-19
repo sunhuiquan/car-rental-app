@@ -55,10 +55,12 @@
 1. 注册请求：
    - **REGISTER ACCOUNT PASSWORD USERNAME PHONE \r\n**
    - **发送图片大小 \r\n**
-   - **等待服务器发回一个"SUCCESS \r\n"的响应(这一步并没有实际发送)**
+   - **等待服务器发回一个"SUCCESS \r\n"的响应**
    - **发送图片二进制字节流 \r\n**
    - 注册响应:
      - REGISTER_SUCCESS(注册请求发送成功(待审批))
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 1. 列出车位信息请求：
    - **LIST \r\n**
    - 列出车位信息响应:
@@ -66,57 +68,130 @@
      - 最后说明结束**LIST_END \r\n**
 1. 搜索车位请求：
    - **SEARCH LOCATION TIME_START DAYS PRICE \r\n**（没有就是NULL）
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 1. 出租车位请求：
    - **RENTAL LOCATION TIME_START TIME_END PRICE \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 1. 订车位请求:
    - **ORDER ACCOUNT ID TIME_START DAYS \r\n**
    - 订单响应:
      - ID或日期错误**ID_OR_DATE_WRONG \r\n**
      - 余额不足**MONEY_WRONG \r\n**
      - 已经被订**HAS_ORDERED_WRONG \r\n**
-1. 充值请求：
-   - **CHARGE_MONEY ACCOUNT VALUE \r\n**
 1. 列出用户信息请求：
    - **LIST_USER \r\n**
    - 列出用户信息响应:
      - 首先是一直发回**对应的信息以|分隔不同消息** (这个用|分隔,而没有\r\n)
      - 最后说明结束**LIST_USER_END \r\n**
+1. 充值用户请求：
+   - **CHARGE_MONEY ACCOUNT VALUE \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
+1. 查询用户信息请求:
+   - **GET_USER ACCOUNT \r\n**
+   - 查询用户信息响应:
+     - 成功**USER_INFORMATION ACCOUNT USERNAME SCORE MONEY \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 1. 列出订单请求：
    - **LIST_ORDER \r\n**
    - 列出订单信息响应:
      - 首先是一直发回**对应的信息以|分隔不同消息** (这个用|分隔,而没有\r\n)
      - 最后说明结束**LIST_ORDER_END \r\n**
-1. 查询用户信息请求:
-   - **GET_USER ACCOUNT \r\n**
-   - 查询用户信息响应:
-     - 成功**USER_INFORMATION ACCOUNT USERNAME SCORE MONEY \r\n**
 1. 管理员踢出用户：
    - **BAN_USER ACCOUNT \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 1. 管理员删除车位信息：
    - **BAN_PARKING ID \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 1. 管理员删除车位信息：
    - **BAN_ORDER ACCOUNT ID \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 1. 管理员发布公告请求
    - **ANNOUNCE \r\n**
-   - **等待服务器发回一个"SUCCESS \r\n"的响应(这一步并没有实际发送)**
+   - **等待服务器发回一个"SUCCESS \r\n"的响应**
    - **传数据(textBox的行也是\r\n)**
    - **ANNOUNCE_END \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 1. 用户获取公告请求：
    - **GET_ANNOUNCE \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 1. 用户获取留言请求：
    - **GET_USER_MESSAGE ACCOUNT \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 1. 管理员留言给用户请求：
    - **PUT_MESSAGE_TO_USER ACCOUNT \r\n**
-   - **等待服务器发回一个"SUCCESS \r\n"的响应(这一步并没有实际发送)**
+   - **等待服务器发回一个"SUCCESS \r\n"的响应**
    - **传数据(textBox的行也是\r\n)**
    - **MESSAGE_END \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 1. 用户留言给管理员请求：
    - **PUT_MESSAGE_TO_ADMIN ACCOUNT \r\n**
-   - **等待服务器发回一个"SUCCESS \r\n"的响应(这一步并没有实际发送)**
+   - **等待服务器发回一个"SUCCESS \r\n"的响应**
    - **传数据(textBox的行也是\r\n)**
    - **MESSAGE_END \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 1. 管理员获取留言请求：
    - **GET_ADMIN_MESSAGE \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
+1. 管理员获取一个待审批用户请求：
+   - **GET_UNSURE_USER \r\n**
+   - 无待审批用户响应:
+     - **EMPTY \r\n**
+   - 成功响应:
+     - **RESPONSE ACCOUNT USERNAME PHONE \r\n**
+     - **发送图片大小 \r\n**
+     - **等待客户端发回一个"SUCCESS \r\n"的响应**
+     - **发送图片二进制字节流 \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
+1. 管理员审批通过请求：
+   - **REGISTER_APPROVE ACCOUNT \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
+1. 管理员审批不通过请求：
+   - **REGISTER_FAIL ACCOUNT \r\n**
+   - 成功响应:
+     - **SUCCESS \r\n**
+   - 失败或错误响应:
+     - **OTHER_WRONG \r\n**
 
 ---
 
