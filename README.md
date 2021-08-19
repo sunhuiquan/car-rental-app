@@ -54,6 +54,7 @@
      - PASSWORD_WRONG(登录失败密码错误)
 1. 注册请求：
    - **REGISTER ACCOUNT PASSWORD USERNAME PHONE \r\n**
+   - **等待服务器发回一个"SUCCESS \r\n"的响应**
    - **发送图片大小 \r\n**
    - **等待服务器发回一个"SUCCESS \r\n"的响应**
    - **发送图片二进制字节流 \r\n**
@@ -175,6 +176,7 @@
      - **EMPTY \r\n**
    - 成功响应:
      - **RESPONSE ACCOUNT USERNAME PHONE \r\n**
+     - **等待客户端发回一个"SUCCESS \r\n"的响应**
      - **发送图片大小 \r\n**
      - **等待客户端发回一个"SUCCESS \r\n"的响应**
      - **发送图片二进制字节流 \r\n**
