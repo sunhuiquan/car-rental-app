@@ -306,32 +306,32 @@ namespace car_rental_server
 						}
 						CarRentalRegister.get_unsure_user(handler);
 					}
-					// else if (request_array[0].Equals(""))
-					// {
-					// }
-					// else if (request_array[0].Equals(""))
-					// {
-					// }
-					// else if (request_array[0].Equals(""))
-					// {
-					// 	/* 
-					// 	eg 1:
-					// 	string sql = "SELECT 查询语句";
-					// 	MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
-					// 	MySqlDataReader rdr = cmd.ExecuteReader();
-					// 	while (rdr.Read()) // 一行一行地读
-					// 	{
-					// 		Console.WriteLine(rdr[0] + " -- " + rdr[1]);
-					// 		// [0] [1] 分别对应第一列属性 第二列属性
-					// 	}
-					// 	rdr.Close();
-
-					// 	eg 2:
-					// 	string sql = "INSERT 非查询语句比如插入、删除之类";
-					// 	MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
-					// 	cmd.ExecuteNonQuery();
-					// 	*/
-					// }
+					else if (request_array[0].Equals("REGISTER_APPROVE"))
+					{
+						// REGISTER_APPROVE ACCOUNT \r\n
+						if (num != 3)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							if (CarRentalRegister.register_approve(handler, request_array[1]) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
+					else if (request_array[0].Equals("REGISTER_FAIL"))
+					{
+						// REGISTER_FAIL ACCOUNT \r\n
+						if (num != 3)
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+						{
+							if (CarRentalRegister.register_fail(handler, request_array[1]) == 0)
+								handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
+							else
+								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						}
+					}
 					else
 					{
 						handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));

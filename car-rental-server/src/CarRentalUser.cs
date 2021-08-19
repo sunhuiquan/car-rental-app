@@ -113,10 +113,16 @@ namespace car_rental_server
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				cmd.ExecuteNonQuery();
 
-				sql = "UPDATE parking SET has_ordered=0 WHERE id in (SELECT id FROM order_form WHERE account='"
-						+ account + "');";
+				sql = "SELECT parking_id FROM order_form WHERE user_account='" + account + "';";
 				cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
-				cmd.ExecuteNonQuery();
+				MySqlDataReader rdr = cmd.ExecuteReader();
+				while (rdr.Read())
+				{
+					string s = "UPDATE parking SET has_ordered=0 WHERE id='" + rdr[0] + "';";
+					MySqlCommand c = new MySqlCommand(s, CarRentalServer.conn_db);
+					c.ExecuteNonQuery();
+				}
+				rdr.Close();
 
 				sql = "DELETE FROM order_form WHERE user_account='" + account + "';";
 				cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
