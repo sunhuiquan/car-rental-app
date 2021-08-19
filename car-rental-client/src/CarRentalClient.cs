@@ -16,10 +16,10 @@ namespace car_rental_client
             try
             {
                 IPAddress ipAddress;
-                if (is_debug)
-                    ipAddress = IPAddress.Parse("127.0.0.1");
-                else
-                    ipAddress = IPAddress.Parse("8.136.218.156");
+                //if (is_debug)
+                //    ipAddress = IPAddress.Parse("127.0.0.1");
+                //else
+                ipAddress = IPAddress.Parse("8.136.218.156");
                 IPEndPoint remoteEP = new IPEndPoint(ipAddress, 50000);
                 client_socket = new Socket(ipAddress.AddressFamily,
                     SocketType.Stream, ProtocolType.Tcp);
