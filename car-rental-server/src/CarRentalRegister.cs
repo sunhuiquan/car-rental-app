@@ -17,6 +17,7 @@ namespace car_rental_server
 		{
 			try
 			{
+				handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
 				string pic_filepath = FILE_PATH + args[1] + ".png";
 
 				if (!Directory.Exists("/tmp/server_pic"))
@@ -56,6 +57,67 @@ namespace car_rental_server
 				return -1;
 			}
 			return 0;
+		}
+
+		public static void get_unsure_user(Socket handler)
+		{
+			try
+			{
+				string sql = "SELECT account,username,phone,pic_pathname from unsure_user;";
+				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
+				MySqlDataReader rdr = cmd.ExecuteReader();
+				bool has_next = false;
+				string file_path = null;
+				if (rdr.Read())
+				{
+					has_next = true;
+					handler.Send(Encoding.UTF8.GetBytes("RESPONSE " + rdr[0] + " " + rdr[1] + " " + rdr[2] + " \r\n"));
+					file_path = rdr[3].ToString();
+				}
+				rdr.Close();
+				if (!has_next)
+					handler.Send(Encoding.UTF8.GetBytes("EMPTY \r\n"));
+
+				byte[] b = new Byte[1024];
+				string request = null;
+				while (true)
+				{
+					int bytesRec = handler.Receive(b);
+					request += Encoding.UTF8.GetString(b, 0, bytesRec);
+					if (request.IndexOf("\r\n") > -1)
+						break;
+				}
+				if (!request.Split(' ')[0].Equals("SUCCESS"))
+					handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+
+				FileStream fileStream = new FileStream(file_path, FileMode.Open, FileAccess.Read);
+				BinaryReader binaryReader = new BinaryReader(fileStream);
+				long length = fileStream.Length;
+				byte[] bytes = new byte[length];
+				binaryReader.Read(bytes, 0, bytes.Length);
+				binaryReader.Close();
+				handler.Send(Encoding.UTF8.GetBytes(length.ToString() + "\r\n"));
+
+				b = new Byte[1024];
+				request = null;
+				while (true)
+				{
+					int bytesRec = handler.Receive(b);
+					request += Encoding.UTF8.GetString(b, 0, bytesRec);
+					if (request.IndexOf("\r\n") > -1)
+						break;
+				}
+				if (!request.Split(' ')[0].Equals("SUCCESS"))
+					handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+
+				handler.Send(bytes);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+				handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+				return;
+			}
 		}
 	}
 }

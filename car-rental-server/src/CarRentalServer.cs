@@ -297,9 +297,15 @@ namespace car_rental_server
 								handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
 						}
 					}
-					// else if (request_array[0].Equals(""))
-					// {
-					// }
+					else if (request_array[0].Equals("GET_UNSURE_USER"))
+					{
+						if (num != 2)
+						{
+							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+							continue;
+						}
+						CarRentalRegister.get_unsure_user(handler);
+					}
 					// else if (request_array[0].Equals(""))
 					// {
 					// }
