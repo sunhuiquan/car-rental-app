@@ -30,7 +30,7 @@ namespace car_rental_client
 
             // REGISTER_APPROVE ACCOUNT \r\n
             if (CarRentalRegister.register_approve(account))
-                MessageBox.Show("成功");
+                MessageBox.Show("操作成功");
             else
                 MessageBox.Show("错误");
 
@@ -50,7 +50,7 @@ namespace car_rental_client
 
             // REGISTER_FAIL ACCOUNT \r\n
             if (CarRentalRegister.register_fail(account))
-                MessageBox.Show("成功");
+                MessageBox.Show("操作成功");
             else
                 MessageBox.Show("错误");
 

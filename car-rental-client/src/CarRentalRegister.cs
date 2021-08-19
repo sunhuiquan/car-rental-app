@@ -15,7 +15,7 @@ namespace car_rental_client
             string r = CarRentalClient.receive(ref is_closed);
             if (!r.Split(' ')[0].Equals("SUCCESS"))
                 return false;
-            
+
             if (CarRentalClient.send_pic(pic_file_name) == -1)
                 return false; ;
 
@@ -29,11 +29,27 @@ namespace car_rental_client
 
         public static bool register_approve(string account)
         {
+            // REGISTER_APPROVE ACCOUNT \r\n
+            CarRentalClient.send("REGISTER_APPROVE " + account + " \r\n");
+
+            int is_closed = 0;
+            string response = CarRentalClient.receive(ref is_closed);
+            string[] result_arrays = response.Split(' ');
+            if (result_arrays[0].Equals("SUCCESS"))
+                return true;
             return false;
         }
 
         public static bool register_fail(string account)
         {
+            // REGISTER_FAIL ACCOUNT \r\n
+            CarRentalClient.send("REGISTER_FAIL " + account + " \r\n");
+
+            int is_closed = 0;
+            string response = CarRentalClient.receive(ref is_closed);
+            string[] result_arrays = response.Split(' ');
+            if (result_arrays[0].Equals("SUCCESS"))
+                return true;
             return false;
         }
 
@@ -53,8 +69,9 @@ namespace car_rental_client
 
                     if (!Directory.Exists("./pic"))
                         Directory.CreateDirectory("./pic");
-                    if (!File.Exists(path))
-                        File.Create(path).Close();
+                    if (File.Exists(path))
+                        File.Delete(path);
+                    File.Create(path).Close();
 
                     args[0] = res_array[1];
                     args[1] = res_array[2];
@@ -65,11 +82,13 @@ namespace car_rental_client
                     CarRentalClient.send("SUCCESS \r\n");
 
                     byte[] b = new byte[length + 100];
-                    if (CarRentalClient.client_socket.Receive(b) != length)
-                        return REGISTER_TYPE.WRONG;
-
-                    BinaryWriter bw = new BinaryWriter(new FileStream(path, FileMode.Truncate));
-                    bw.Write(b, 0, int.Parse(length.ToString()));
+                    BinaryWriter bw = new BinaryWriter(new FileStream(path, FileMode.Append));
+                    for (int l = 0; l < length;)
+                    {
+                        int len = CarRentalClient.client_socket.Receive(b);
+                        bw.Write(b, 0, len);
+                        l += len;
+                    }
                     bw.Close();
                 }
                 catch (Exception)
