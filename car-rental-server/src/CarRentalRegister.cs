@@ -11,16 +11,13 @@ namespace car_rental_server
 {
 	public class CarRentalRegister
 	{
-		private static long count = 0;
 		private const string FILE_PATH = "/tmp/server_pic/pic_"; // 在linux的/tmp这是因为肯定存在且有权限
 
 		public static int register(Socket handler, string[] args)
 		{
 			try
 			{
-				if (count < 0) // 溢出
-					return -1;
-				string pic_filepath = FILE_PATH + count.ToString() + ".png";
+				string pic_filepath = FILE_PATH + args[1] + ".png";
 
 				if (!Directory.Exists("/tmp/server_pic"))
 					Directory.CreateDirectory("/tmp/server_pic");
@@ -43,6 +40,7 @@ namespace car_rental_server
 				if (handler.Receive(b) != length)
 					return -1;
 
+				// 截断模式+账号不可能重复保证正确性
 				BinaryWriter bw = new BinaryWriter(new FileStream(pic_filepath, FileMode.Truncate));
 				bw.Write(b, 0, int.Parse(length.ToString()));
 				bw.Close();
