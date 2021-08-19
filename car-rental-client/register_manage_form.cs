@@ -70,6 +70,7 @@ namespace car_rental_client
 
         private void get_next()
         {
+            pic.Image = null;
             string[] args = new string[3];
             REGISTER_TYPE ret = CarRentalRegister.get_next(ref args);
             if (ret == REGISTER_TYPE.SUCCESS)
@@ -78,7 +79,11 @@ namespace car_rental_client
                 account = args[0];
                 b.Text = args[1];
                 c.Text = args[2];
-                pic.Image = Image.FromFile(CarRentalRegister.path);
+
+                using (FileStream f = new FileStream(CarRentalRegister.path,FileMode.Open))
+                {
+                    pic.Image = Image.FromStream(f);
+                }
             }
             else if (ret == REGISTER_TYPE.EMPTY)
             {

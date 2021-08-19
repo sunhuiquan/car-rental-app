@@ -22,6 +22,7 @@ namespace car_rental_client
         private void pic_choose_button_Click(object sender, EventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.RestoreDirectory = true;
             DialogResult result = fileDialog.ShowDialog();
             string[] name = fileDialog.FileName.Split('.');
 

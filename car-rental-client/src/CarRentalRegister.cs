@@ -69,9 +69,9 @@ namespace car_rental_client
 
                     if (!Directory.Exists("./pic"))
                         Directory.CreateDirectory("./pic");
-                    if (File.Exists(path))
-                        File.Delete(path);
-                    File.Create(path).Close();
+
+                    FileStream a = new FileStream(path, FileMode.Create);
+                    a.Close();
 
                     args[0] = res_array[1];
                     args[1] = res_array[2];
@@ -82,7 +82,8 @@ namespace car_rental_client
                     CarRentalClient.send("SUCCESS \r\n");
 
                     byte[] b = new byte[length + 100];
-                    BinaryWriter bw = new BinaryWriter(new FileStream(path, FileMode.Append));
+                    FileStream fs = new FileStream(path, FileMode.Append);
+                    BinaryWriter bw = new BinaryWriter(fs);
                     for (int l = 0; l < length;)
                     {
                         int len = CarRentalClient.client_socket.Receive(b);
@@ -90,9 +91,11 @@ namespace car_rental_client
                         l += len;
                     }
                     bw.Close();
+                    fs.Close();
                 }
-                catch (Exception)
-                {
+                catch (Exception ex)
+                { 
+                    Console.WriteLine(ex.ToString());
                     return REGISTER_TYPE.WRONG;
                 }
                 return REGISTER_TYPE.SUCCESS;

@@ -48,6 +48,7 @@ namespace car_rental_client
                 byte[] bytes = new byte[length];
                 binaryReader.Read(bytes, 0, bytes.Length);
                 binaryReader.Close();
+                fileStream.Close();
                 client_socket.Send(Encoding.UTF8.GetBytes(length.ToString() + "\r\n"));
 
                 int is_closed = 0;
