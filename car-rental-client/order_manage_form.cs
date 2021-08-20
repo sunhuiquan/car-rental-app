@@ -40,8 +40,8 @@ namespace car_rental_client
                     ListViewItem item = new ListViewItem(str_array[0]);
                     item.SubItems.Add(str_array[1]);
                     item.SubItems.Add(str_array[2]);
-                    item.SubItems.Add(str_array[4]);
-                    item.SubItems.Add(str_array[6]);
+                    item.SubItems.Add(str_array[5]);
+                    item.SubItems.Add(str_array[8]);
                     informatino_listview.Items.Add(item);
                 }
             }

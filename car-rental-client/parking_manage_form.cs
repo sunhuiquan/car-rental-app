@@ -30,12 +30,12 @@ namespace car_rental_client
                 for (int i = 0; i < parking_information_array.Length & parking_information_array[i] != null; ++i)
                 {
                     string[] str_array = parking_information_array[i].Split(' ');
-                    ListViewItem item = new ListViewItem(str_array[6]);
+                    ListViewItem item = new ListViewItem(str_array[8]);
                     item.SubItems.Add(str_array[0]);
                     item.SubItems.Add(str_array[1]);
                     item.SubItems.Add(str_array[2]);
-                    item.SubItems.Add(str_array[4]);
-                    if (int.Parse(str_array[7]) == 0)
+                    item.SubItems.Add(str_array[5]);
+                    if (int.Parse(str_array[9]) == 0)
                         item.SubItems.Add("未租借");
                     else
                         item.SubItems.Add("已被租借");
