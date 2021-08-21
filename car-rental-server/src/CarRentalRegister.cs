@@ -17,6 +17,8 @@ namespace car_rental_server
 		{
 			try
 			{
+				// DateTime beforDT = System.DateTime.Now;
+
 				handler.Send(Encoding.UTF8.GetBytes("SUCCESS \r\n"));
 				string pic_filepath = FILE_PATH + args[1] + ".png";
 
@@ -54,6 +56,10 @@ namespace car_rental_server
 				+ args[1] + "','" + args[2] + "','" + args[4] + "','" + pic_filepath + "',0,'" + args[3] + "',0);";
 				MySqlCommand cmd = new MySqlCommand(sql, CarRentalServer.conn_db);
 				cmd.ExecuteNonQuery();
+
+				// DateTime afterDT = System.DateTime.Now;
+				// TimeSpan ts = afterDT.Subtract(beforDT);
+				// Console.WriteLine("DateTime总共花费{0}ms.", ts.TotalMilliseconds);
 			}
 			catch (Exception ex)
 			{

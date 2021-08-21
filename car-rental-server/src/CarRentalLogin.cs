@@ -19,9 +19,15 @@ namespace car_rental_server
 			}
 			else if (request_array[1].Equals("USER"))
 			{
+				// DateTime beforDT = System.DateTime.Now;
+
 				string sql = "SELECT account, password FROM user";
 				string result = check_login(sql, request_array[2], request_array[3]);
 				handler.Send(Encoding.UTF8.GetBytes(result));
+
+				// DateTime afterDT = System.DateTime.Now;
+				// TimeSpan ts = afterDT.Subtract(beforDT);
+				// Console.WriteLine("DateTime总共花费{0}ms.", ts.TotalMilliseconds);
 
 				if (result.Equals("LOGIN_SUCCESS \r\n"))
 					return 0;

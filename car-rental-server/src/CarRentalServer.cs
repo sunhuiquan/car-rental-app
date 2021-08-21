@@ -74,8 +74,10 @@ namespace car_rental_server
 					// 功能解析
 					if (request_array[0].Equals("ACCOUNT"))
 					{
-						if (check_login_num(num, request_array) != 0 || CarRentalLogin.login(request_array, handler) != 0)
+						if (check_login_num(num, request_array) != 0)
 							handler.Send(Encoding.UTF8.GetBytes("OTHER_WRONG \r\n"));
+						else
+							CarRentalLogin.login(request_array, handler);
 					}
 					else if (request_array[0].Equals("REGISTER"))
 					{
