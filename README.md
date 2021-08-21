@@ -357,41 +357,36 @@
    - **窗体**  
    ![IMG](./image/65.png)  
    - **服务端**  
-   ![IMG](./image/x.png)  
-   ![IMG](./image/x.png)  
+   ![IMG](./image/68.png)  
 
 1. 实现订单管理
    - **客户端**  
-   ![IMG](./image/x.png)  
-   ![IMG](./image/x.png)  
+   ![IMG](./image/70.png)  
+   ![IMG](./image/71.png)  
    - **窗体**  
-   ![IMG](./image/x.png)  
-   ![IMG](./image/x.png)  
+   ![IMG](./image/69.png)  
    - **服务端**  
-   ![IMG](./image/x.png)  
-   ![IMG](./image/x.png)  
+   ![IMG](./image/72.png)  
 
 1. 实现用户管理
    - **客户端**  
-   ![IMG](./image/x.png)  
-   ![IMG](./image/x.png)  
+   ![IMG](./image/74.png)  
+   ![IMG](./image/75.png)  
    - **窗体**  
-   ![IMG](./image/x.png)  
-   ![IMG](./image/x.png)  
+   ![IMG](./image/73.png)  
    - **服务端**  
-   ![IMG](./image/x.png)  
-   ![IMG](./image/x.png)  
+   ![IMG](./image/76.png)  
 
 1. 实现公告
    - **客户端**  
    ![IMG](./image/x.png)  
    ![IMG](./image/x.png)  
    - **窗体**  
-   ![IMG](./image/x.png)  
-   ![IMG](./image/x.png)  
+   ![IMG](./image/41.png)  
+   ![IMG](./image/77.png)  
    - **服务端**  
-   ![IMG](./image/x.png)  
-   ![IMG](./image/x.png)   
+   ![IMG](./image/79.png)  
+   ![IMG](./image/80.png)  
 
 1. 实现各种各样的功能，不过具体都是C/S架构思路，用户点击客户端窗体对应控件，让客户端发送请求到服务器，服务器解析请求并执行相应命令，如果需要数据库那么服务器会操作数据库取得结果，然后服务器发回客户端响应报文，然后客户端解析响应报文，并最终显示到客户端窗体上。
 
