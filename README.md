@@ -376,9 +376,6 @@
    ![IMG](./image/76.png)  
 
 1. 实现公告
-   - **客户端**  
-   ![IMG](./image/x.png)  
-   ![IMG](./image/x.png)  
    - **窗体**  
    ![IMG](./image/41.png)  
    ![IMG](./image/77.png)  
