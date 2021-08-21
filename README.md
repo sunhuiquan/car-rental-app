@@ -393,13 +393,13 @@
 ### 推荐文献
 
 [1] _.NET Docs_ <https://docs.microsoft.com/zh-cn/dotnet/>  
-[2] _MySql .NET develop docs_ <https://dev.mysql.com/doc/connector-net/en/>
-[3] _Unix Network Programming, Volume 1: The Sockets Networking API_
-[4] _TCP/IP Illustrated, Vol. 1: The Protocols_
-[5] _The Linux Programing Interface_
-[6] _Computer Networking: A Top-down Approach_
-[7] _Computer Systems: A Programmer's Perspective_
-[8] _Operating System Concepts_
+[2] _MySql .NET develop docs_ <https://dev.mysql.com/doc/connector-net/en/>  
+[3] _Unix Network Programming, Volume 1: The Sockets Networking API_  
+[4] _TCP/IP Illustrated, Vol. 1: The Protocols_  
+[5] _The Linux Programing Interface_  
+[6] _Computer Networking: A Top-down Approach_  
+[7] _Computer Systems: A Programmer's Perspective_  
+[8] _Operating System Concepts_  
 
 ---
 
