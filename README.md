@@ -227,9 +227,9 @@
      ![IMG](./image/3.png)
 
 1. 因为这个课设并不需要多大的并行服务量，所以我并没有实现线程池，也懒得用 c#的并行库的线程池。遇到的第一个难题是怎么确定线程的数量，如果是**CPU 密集型那么自然套 CPU 核心数 + 1**即可，**I/O 密集的程序，CPU 核心数 \* [1 + (IO/CPU)]**，但这个服务是一个交互式程序，阻塞占比估计显然这个非常低，因为客户端想出来自己要干什么按一下按钮一般都是几秒以上，而服务器处理消息并不需要多大性能，都不是一个数量级的，既不是一个 CPU 密集型也不是一个 IO 密集型，而是一个交互阻塞型程序，所以可以用这个**线程数 = Ncpu /（1 - 阻塞系数）**来估算.  
-    ![IMG](./image/x.png)  
+    ![IMG](./image/17.png)  
 这是一个比较有代表的耗时算是中等偏上的功能的用时(当然挺不准的，因为我只是从代码的角度考虑，没有实际一个一个把每个功能的耗时都试一次)，估一个差不多的值，2次30多秒，低估(为了提高响应度)阻塞比为0.96估算,租的阿里云 ECS 是 2CPU 4 核心的，阻塞系数算 0.96 么估算是 100，这里我用的是 Semaphore 控制线程资源。  
-**注意这里是非常简单的估算，实际中会经过繁复的性能测试，和不同规模数据的性能测试，计算公式也比这个复杂多了，这里只是随意估算一个意思一下而已**
+**注意这里是非常简单的估算，实际中会经过繁复的性能测试，和不同规模数据的性能测试，计算公式也比这个复杂多了，这里只是随意估算一个意思一下而已,而且这里网络延迟造成的阻塞时间也没考虑(我服务器在杭州，我人在青岛，我觉得网络挺好的，我组员就有说ssh过去好卡的。。。)**
 
 1. 遇到了一个小问题就是一直跟我讲 Address already used 错误，我一开始以为是 TIME_WAIT 的地址重用问题，等待就好，然后发现不是(原理上也不是。。)，用 netstat 看了看进程发现上次运行的服务就没关。。
 
@@ -240,7 +240,7 @@
    <PackageReference Include="MySql.Data" Version="8.0.26"/>
    ```
 
-1. NuGET在服务器上死活告诉我无法建立连接，一开始我以为我的ECS上不了外网所以连不上，所以找了个华为的镜像源；但还是不行，然后仔细看错误代码，发现是安全证书的问题，我首先检查了openssl，发现没有问题，让我陷入困惑，然后我看了/usr/local/ssl/certs发现里面是空的，相反我在/etc/ssl/certs有证书内容，所以我删了certs然后ln -s建立了个软链接到etc下的那个，然后就成功了，nuget终于能正常给我引入mysql.data包了。
+1. NuGET在服务器上死活告诉我无法建立连接，一开始我以为我的ECS上不了外网所以连不上，所以找了个华为的镜像源；但还是不行，然后仔细看错误代码，发现是安全证书的问题，我首先检查了openssl，发现没有问题，让我陷入困惑，然后我看了/usr/local/ssl/certs发现里面是空的，相反我在/etc/ssl/certs有证书内容，所以我删了certs然后ln -s建立了个软链接到etc下的那个，然后就成功了，nuget终于能正常给我引入mysql.data包了。(Ubuntu真坑。。)
 
 1. 新建一个 mysql 用户发现看不到数据库，这是因为忘了授权了。  
    ![IMG](./image/7.png)
@@ -254,7 +254,15 @@
 1. 测试远程使用数据库(数据库已放到 ECS 上了)  
    ![IMG](./image/16.png)
 
-1. 实现登录功能，用户从客户端窗体点击,然后内部代码实现发送登录报文到服务器，服务器解析请求，发现是登录请求然后查询数据库，对比数据库数据看是否有此用户，服务器返回客户端登录结果，客户端解析登陆结果，然后客户端窗体显示结果。  
+1. 实现登录功能，用户从客户端窗体点击,然后内部代码实现发送登录报文到服务器，服务器解析请求，发现是登录请求然后查询数据库，对比数据库数据看是否有此用户，服务器返回客户端登录结果，客户端解析登陆结果，然后客户端窗体显示结果。
+   - **客户端**  
+   ![IMG](./image/37.png)  
+   ![IMG](./image/38.png)  
+   ![IMG](./image/39.png)  
+   ![IMG](./image/40.png)  
+   - **窗体**  
+   ![IMG](./image/36.png)
+   - **服务端**  
    ![IMG](./image/13.png)  
    ![IMG](./image/14.png)  
    **注意这里是测试，所以用的是回环地址 127.0.0.1，后面实际项目是用公网 IP 的(这里是因为 wsl 比 ssh 舒适，等着项目完成后再放到 ECS 上)**  
@@ -262,22 +270,130 @@
 
 1. 实现应用层协议，来规定好报文格式和一些tcp传输的细节，这里我遇到一些传二进制文件的问题，修改了一下报文格式和传输细节，终于成功。
 
-1. 实现登录功能，
-   ![IMG](./image/x.png)
+1. 实现注册
+   - **客户端**  
+   ![IMG](./image/21.png)  
+   ![IMG](./image/22.png)  
+   ![IMG](./image/23.png)  
+   ![IMG](./image/24.png)  
+   ![IMG](./image/25.png)  
+   ![IMG](./image/26.png)  
+   ![IMG](./image/27.png)  
+   - **窗体**  
+   ![IMG](./image/28.png)  
+   ![IMG](./image/29.png)  
+   - **服务端**  
+   ![IMG](./image/30.png)  
+   ![IMG](./image/31.png)  
+   ![IMG](./image/32.png)  
+   ![IMG](./image/33.png)  
+   ![IMG](./image/34.png)  
+   ![IMG](./image/35.png)  
 
-1. 实现浏览车位功能，
+1. 实现浏览车位功能  
+   ![IMG](./image/18.png)  
+   ![IMG](./image/19.png)  
+   ![IMG](./image/20.png)
 
-1. 实现个人中心，
+1. 实现查询功能
+   - **客户端**  
+   ![IMG](./image/42.png)  
+   ![IMG](./image/43.png)  
+   - **窗体**  
+   ![IMG](./image/41.png)  
+   - **服务端**  
+   ![IMG](./image/44.png)  
+   ![IMG](./image/45.png)  
 
-1. 实现我的订单，
+1. 实现发布功能
+   - **客户端**  
+   ![IMG](./image/46.png)  
+   - **窗体**  
+   ![IMG](./image/47.png)  
+   - **服务端**  
+   ![IMG](./image/48.png)  
 
-1. 实现留言和留言管理，
+1. 实现预约功能
+   - **客户端**  
+   ![IMG](./image/49.png)  
+   - **窗体**  
+   ![IMG](./image/41.png)  
+   - **服务端**  
+   ![IMG](./image/50.png)  
+   ![IMG](./image/51.png)  
 
-1. 实现车位管理，
+1. 实现个人中心
+   - **客户端**  
+   ![IMG](./image/52.png)  
+   ![IMG](./image/53.png)  
+   - **窗体**  
+   ![IMG](./image/41.png)  
+   - **服务端**  
+   ![IMG](./image/54.png)  
 
-1. 实现订单管理，
+1. 实现我的订单
+   - **客户端**  
+   ![IMG](./image/55.png)  
+   - **窗体**  
+   ![IMG](./image/56.png)  
+   - **服务端**  
+   ![IMG](./image/57.png)  
 
-1. 实现用户管理，
+1. 实现留言和留言管理
+   - **客户端**  
+   ![IMG](./image/58.png)  
+   ![IMG](./image/60.png)  
+   - **窗体**  
+   ![IMG](./image/59.png)  
+   ![IMG](./image/61.png)  
+   - **服务端**  
+   ![IMG](./image/63.png)  
+   ![IMG](./image/64.png)  
+
+1. 实现车位管理
+   - **客户端**  
+   ![IMG](./image/66.png)  
+   ![IMG](./image/67.png)  
+   - **窗体**  
+   ![IMG](./image/65.png)  
+   - **服务端**  
+   ![IMG](./image/x.png)  
+   ![IMG](./image/x.png)  
+
+1. 实现订单管理
+   - **客户端**  
+   ![IMG](./image/x.png)  
+   ![IMG](./image/x.png)  
+   - **窗体**  
+   ![IMG](./image/x.png)  
+   ![IMG](./image/x.png)  
+   - **服务端**  
+   ![IMG](./image/x.png)  
+   ![IMG](./image/x.png)  
+
+1. 实现用户管理
+   - **客户端**  
+   ![IMG](./image/x.png)  
+   ![IMG](./image/x.png)  
+   - **窗体**  
+   ![IMG](./image/x.png)  
+   ![IMG](./image/x.png)  
+   - **服务端**  
+   ![IMG](./image/x.png)  
+   ![IMG](./image/x.png)  
+
+1. 实现公告
+   - **客户端**  
+   ![IMG](./image/x.png)  
+   ![IMG](./image/x.png)  
+   - **窗体**  
+   ![IMG](./image/x.png)  
+   ![IMG](./image/x.png)  
+   - **服务端**  
+   ![IMG](./image/x.png)  
+   ![IMG](./image/x.png)   
+
+1. 实现各种各样的功能，不过具体都是C/S架构思路，用户点击客户端窗体对应控件，让客户端发送请求到服务器，服务器解析请求并执行相应命令，如果需要数据库那么服务器会操作数据库取得结果，然后服务器发回客户端响应报文，然后客户端解析响应报文，并最终显示到客户端窗体上。
 
 ---
 
@@ -286,6 +402,11 @@
 [1] _.NET Docs_ <https://docs.microsoft.com/zh-cn/dotnet/>  
 [2] _MySql .NET develop docs_ <https://dev.mysql.com/doc/connector-net/en/>
 [3] _Unix Network Programming, Volume 1: The Sockets Networking API_
+[4] _TCP/IP Illustrated, Vol. 1: The Protocols_
+[5] _The Linux Programing Interface_
+[6] _Computer Networking: A Top-down Approach_
+[7] _Computer Systems: A Programmer's Perspective_
+[8] _Operating System Concepts_
 
 ---
 
