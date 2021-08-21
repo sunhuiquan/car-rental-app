@@ -10,7 +10,7 @@ namespace car_rental_server
 	public class CarRentalServer
 	{
 		public static MySqlConnection conn_db;
-		private static Semaphore sem = new Semaphore(40, 40);
+		private static Semaphore sem = new Semaphore(100, 100);
 
 		public static void start_server()
 		{
